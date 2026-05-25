@@ -5,7 +5,7 @@ COPY BlogManagement.API/BlogManagement.API.csproj ./
 RUN dotnet restore
 
 COPY . ./
-RUN dotnet publish BlogManagement.API.csproj -c Release -o /app/publish
+RUN dotnet publish BlogManagement.API/BlogManagement.API.csproj -c Release -o /app/publish
 
 FROM mcr.microsoft.com/dotnet/aspnet:10.0 AS final
 WORKDIR /app
