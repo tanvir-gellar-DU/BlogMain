@@ -1,7 +1,7 @@
 FROM mcr.microsoft.com/dotnet/sdk:10.0 AS build
 WORKDIR /src
 
-COPY BlogManagement.API.csproj ./
+COPY BlogManagement.API/BlogManagement.API.csproj ./
 RUN dotnet restore
 
 COPY . ./
