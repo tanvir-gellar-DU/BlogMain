@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Blog Editor | BS23-Blog</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script src="/jquery/jquery.min.js"></script>
+    <script src="/js/app.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet" />
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "error": "#ba1a1a",
+                        "surface-container-low": "#f2f4f6",
+                        "on-primary-fixed-variant": "#343d96",
+                        "on-tertiary-fixed": "#390c00",
+                        "surface-container-lowest": "#ffffff",
+                        "inverse-on-surface": "#eff1f3",
+                        "surface-bright": "#f7f9fb",
+                        "inverse-primary": "#bdc2ff",
+                        "on-primary": "#ffffff",
+                        "on-secondary": "#ffffff",
+                        "error-container": "#ffdad6",
+                        "background": "#f7f9fb",
+                        "on-primary-container": "#8690ee",
+                        "on-error-container": "#93000a",
+                        "on-tertiary-fixed-variant": "#7b2e12",
+                        "primary-fixed": "#e0e0ff",
+                        "tertiary-fixed": "#ffdbd0",
+                        "on-tertiary": "#ffffff",
+                        "on-surface": "#191c1e",
+                        "on-primary-fixed": "#000767",
+                        "on-tertiary-container": "#e17c5a",
+                        "surface-container-highest": "#e0e3e5",
+                        "on-error": "#ffffff",
+                        "tertiary": "#380b00",
+                        "surface-container": "#eceef0",
+                        "tertiary-container": "#5c1800",
+                        "on-secondary-fixed-variant": "#3a485b",
+                        "secondary-container": "#d5e3fc",
+                        "secondary-fixed-dim": "#b9c7df",
+                        "on-surface-variant": "#454652",
+                        "primary-container": "#1a237e",
+                        "surface-tint": "#4c56af",
+                        "surface": "#f7f9fb",
+                        "secondary": "#515f74",
+                        "on-secondary-fixed": "#0d1c2e",
+                        "surface-variant": "#e0e3e5",
+                        "inverse-surface": "#2d3133",
+                        "primary-fixed-dim": "#bdc2ff",
+                        "outline-variant": "#c6c5d4",
+                        "secondary-fixed": "#d5e3fc",
+                        "surface-container-high": "#e6e8ea",
+                        "primary": "#000666",
+                        "on-secondary-container": "#57657a",
+                        "surface-dim": "#d8dadc",
+                        "on-background": "#191c1e",
+                        "outline": "#767683",
+                        "tertiary-fixed-dim": "#ffb59d"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "md": "16px",
+                        "margin-desktop": "48px",
+                        "gutter": "24px",
+                        "xs": "4px",
+                        "margin-mobile": "16px",
+                        "base": "4px",
+                        "lg": "24px",
+                        "xl": "32px",
+                        "sm": "8px",
+                        "container-max": "1280px"
+                    },
+                    "fontFamily": {
+                        "body-md": ["Inter"],
+                        "body-sm": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "headline-xl-mobile": ["Inter"],
+                        "headline-lg": ["Inter"],
+                        "headline-xl": ["Inter"],
+                        "label-sm": ["Inter"],
+                        "headline-sm": ["Inter"],
+                        "headline-md": ["Inter"],
+                        "label-md": ["Inter"]
+                    },
+                    "fontSize": {
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                        "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                        "headline-xl-mobile": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "headline-lg": ["30px", {"lineHeight": "38px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                        "headline-xl": ["40px", {"lineHeight": "48px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "label-sm": ["12px", {"lineHeight": "14px", "letterSpacing": "0.02em", "fontWeight": "500"}],
+                        "headline-sm": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                        "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                        "label-md": ["14px", {"lineHeight": "16px", "letterSpacing": "0.01em", "fontWeight": "500"}]
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+
+        .ai-shimmer {
+            background: linear-gradient(90deg, transparent, rgba(26, 35, 126, 0.05), transparent);
+            background-size: 200% 100%;
+            animation: shimmer 3s infinite linear;
+        }
+
+        @keyframes shimmer {
+            0% {
+                background-position: 200% 0;
+            }
+
+            100% {
+                background-position: -200% 0;
+            }
+        }
+
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #c6c5d4;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body class="bg-surface-container-low text-on-surface font-body-md min-h-screen flex flex-col">
+    <!-- Top Navigation Anchor -->
+    <header class="bg-surface dark:bg-background border-b border-outline-variant dark:border-outline shadow-sm docked full-width top-0 z-50 sticky">
+        <div class="flex justify-between items-center w-full px-md h-16 max-w-container-max mx-auto">
+            <div class="flex items-center gap-md">
+                <span class="font-headline-xl text-headline-md font-extrabold text-primary cursor-pointer" onclick="window.location.href='/index.html'">BS23-Blog</span>
+                <nav class="hidden md:flex items-center gap-md ml-lg">
+                    <a class="text-on-surface-variant hover:text-primary hover:bg-surface-container-low transition-colors duration-200 cursor-pointer active:opacity-80" href="/index.html">Home</a>
+                   
+                </nav>
+            </div>
+            <div id="auth-buttons-container" class="flex items-center gap-sm">
+            </div>
+        </div>
+    </header>
+    <div class="flex flex-1 overflow-hidden">
+        <!-- Side Navigation -->
+        <aside class="hidden lg:flex flex-col py-md space-y-base bg-surface-container-low h-[calc(100vh-64px)] w-64 border-r border-outline-variant shrink-0">
+            <div class="px-md mb-md">
+
+                <p class="font-label-md text-label-md text-on-surface-variant">Author Portal</p>
+            </div>
+            <nav class="flex-1">
+                <a class="flex items-center gap-sm bg-secondary-container text-on-secondary-container rounded-lg p-sm mx-sm font-bold active:scale-95 transition-all duration-200" href="/Pages/dashboard.html">
+                    <span class="material-symbols-outlined" data-icon="article">article</span>
+                    <span class="font-label-md text-label-md">My Posts</span>
+                </a>
+            </nav>
+          
+        </aside>
+        <!-- Main Editor Canvas -->
+        <main class="flex-1 bg-surface-container-lowest overflow-y-auto custom-scrollbar">
+            <div class="max-w-[800px] mx-auto px-md py-lg">
+                <!-- Editor Header Metadata -->
+                <div class="space-y-md mb-lg">
+                    <input id="editor-title" class="w-full font-headline-xl text-headline-xl border-none bg-transparent focus:ring-0 text-on-surface placeholder-outline-variant p-0 font-bold" placeholder="Post Title" type="text" required />
+                    <div class="flex flex-wrap items-center gap-md border-y border-outline-variant py-md">
+                        <div class="flex flex-col gap-xs flex-1 min-w-[200px]">
+                            <label class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Category</label>
+                            <select id="editor-category" class="bg-surface-container-low border-none rounded-lg font-label-md text-label-md focus:ring-2 focus:ring-primary py-xs">
+                                <!-- Dynamic options -->
+                            </select>
+                        </div>
+                        <div class="flex flex-col gap-xs flex-1 min-w-[200px]">
+                            <label class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Cover Image URL</label>
+                            <input id="editor-cover-url" class="bg-surface-container-low border-none rounded-lg font-label-md text-label-md focus:ring-2 focus:ring-primary py-xs" placeholder="https://example.com/image.jpg" type="text" />
+                        </div>
+                        <div class="flex flex-col gap-xs flex-[2] min-w-[240px]">
+                            <label class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Tags</label>
+                            <input id="editor-tags" class="bg-surface-container-low border-none rounded-lg font-label-md text-label-md focus:ring-2 focus:ring-primary py-xs" placeholder="Tags (comma separated)..." type="text" />
+                        </div>
+                    </div>
+                </div>
+                <!-- Rich Text Toolbar -->
+                <div class="sticky top-0 bg-surface-container-lowest z-10 flex items-center gap-sm py-base border-b border-outline-variant mb-md overflow-x-auto no-scrollbar">
+                    <button id="btn-bold" type="button" class="p-xs hover:bg-surface-container-high rounded text-on-surface-variant"><span class="material-symbols-outlined">format_bold</span></button>
+                    <button id="btn-italic" type="button" class="p-xs hover:bg-surface-container-high rounded text-on-surface-variant"><span class="material-symbols-outlined">format_italic</span></button>
+                    <button id="btn-underline" type="button" class="p-xs hover:bg-surface-container-high rounded text-on-surface-variant"><span class="material-symbols-outlined">format_underlined</span></button>
+                    <div class="w-[1px] h-4 bg-outline-variant mx-xs"></div>
+                    <button id="btn-h1" type="button" class="p-xs hover:bg-surface-container-high rounded text-on-surface-variant"><span class="material-symbols-outlined">format_h1</span></button>
+                    <button id="btn-h2" type="button" class="p-xs hover:bg-surface-container-high rounded text-on-surface-variant"><span class="material-symbols-outlined">format_h2</span></button>
+                    <button id="btn-list" type="button" class="p-xs hover:bg-surface-container-high rounded text-on-surface-variant"><span class="material-symbols-outlined">format_list_bulleted</span></button>
+                    <button id="btn-quote" type="button" class="p-xs hover:bg-surface-container-high rounded text-on-surface-variant"><span class="material-symbols-outlined">format_quote</span></button>
+                    <div class="w-[1px] h-4 bg-outline-variant mx-xs"></div>
+                    <button id="btn-image" type="button" class="p-xs hover:bg-surface-container-high rounded text-on-surface-variant"><span class="material-symbols-outlined">image</span></button>
+                    <button id="btn-link" type="button" class="p-xs hover:bg-surface-container-high rounded text-on-surface-variant"><span class="material-symbols-outlined">link</span></button>
+                    <button id="btn-code" type="button" class="p-xs hover:bg-surface-container-high rounded text-on-surface-variant"><span class="material-symbols-outlined">code</span></button>
+                </div>
+                <!-- Editor Body -->
+                <div class="prose max-w-none">
+                    <div id="editor-content" class="w-full min-h-[614px] border-none bg-transparent focus:ring-0 font-body-lg text-body-lg leading-relaxed text-on-surface p-0 resize-none custom-scrollbar outline-none focus:outline-none" contenteditable="true" placeholder="Start your story here..." style="word-wrap: break-word; overflow-wrap: break-word;"></div>
+                </div>
+            </div>
+        </main>
+        <!-- Right AI Assistant Panel -->
+        <aside id="ai-panel" class="hidden xl:flex flex-col w-80 bg-surface border-l border-outline-variant h-[calc(100vh-64px)] overflow-hidden">
+            <div class="p-md border-b border-outline-variant bg-surface-container-low ai-shimmer flex justify-between items-center">
+                <div class="flex items-center gap-xs">
+                    <span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">auto_awesome</span>
+                    <h3 class="font-headline-sm text-headline-sm text-on-surface">AI Writing Assistant</h3>
+                </div>
+                <button id="close-ai-panel-btn" class="xl:hidden text-on-surface-variant hover:text-primary transition-colors flex items-center">
+                    <span class="material-symbols-outlined">close</span>
+                </button>
+            </div>
+            <div class="flex-1 overflow-y-auto p-md space-y-md custom-scrollbar">
+                <!-- AI Feature Card: Improve Grammar -->
+                <div id="ai-btn-grammar" class="p-sm bg-surface-container-lowest border-2 border-primary-container/10 rounded-xl hover:shadow-sm transition-all cursor-pointer group">
+                    <div class="flex justify-between items-start mb-xs">
+                        <span class="font-label-md text-label-md text-primary font-bold">Improve Grammar</span>
+                        <span class="material-symbols-outlined text-outline-variant group-hover:text-primary transition-colors">check_circle</span>
+                    </div>
+                    <p class="text-label-sm text-on-surface-variant">Check spelling, punctuation, and structural syntax errors automatically.</p>
+                </div>
+                <!-- AI Feature Card: Improve Clarity -->
+                <div id="ai-btn-clarity" class="p-sm bg-surface-container-lowest border-2 border-primary-container/10 rounded-xl hover:shadow-sm transition-all cursor-pointer group">
+                    <div class="flex justify-between items-start mb-xs">
+                        <span class="font-label-md text-label-md text-primary font-bold">Improve Clarity</span>
+                        <span class="material-symbols-outlined text-outline-variant group-hover:text-primary transition-colors">lightbulb</span>
+                    </div>
+                    <p class="text-label-sm text-on-surface-variant">Simplify complex sentences and ensure your message is easy to digest.</p>
+                </div>
+                <!-- AI Feature: Tone Change -->
+               
+                <!-- Suggestions Placeholder -->
+                <div class="mt-lg">
+                    <div class="flex justify-between items-center mb-sm">
+                        <h4 class="font-label-sm text-label-sm text-on-surface-variant uppercase">Suggestions</h4>
+                        <span class="text-[10px] bg-primary-fixed text-on-primary-fixed px-sm py-0.5 rounded-full font-bold">LIVE</span>
+                    </div>
+                    <div id="ai-suggestions-container" class="space-y-sm">
+                        <div class="p-sm bg-surface-container-lowest rounded-lg border border-outline-variant/30 italic text-label-md text-on-surface-variant">
+                            Click grammar, clarity, or generate ideas to see AI suggestions.
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="p-md border-t border-outline-variant mt-auto">
+                <button id="ai-btn-ideas" class="w-full bg-primary-container text-on-primary-container py-md rounded-xl font-label-md text-label-md flex items-center justify-center gap-xs hover:brightness-95 active:scale-95 transition-all shadow-sm">
+                    <span class="material-symbols-outlined">bolt</span>
+                    Generate Ideas
+                </button>
+            </div>
+        </aside>
+    </div>
+
+    <!-- Bottom Actions Bar -->
+    <footer class="h-20 bg-surface border-t border-outline-variant z-50 px-md shrink-0">
+        <div class="max-w-container-max mx-auto h-full flex items-center justify-between">
+            <div class="flex items-center gap-md">
+                <span class="flex items-center gap-xs text-on-surface-variant text-label-sm">
+                    <span id="save-status-icon" class="material-symbols-outlined text-[18px]">cloud_done</span>
+                    <span id="save-status-text">Draft Ready</span>
+                </span>
+                <span class="text-on-surface-variant text-label-sm">|</span>
+                <span id="word-count-text" class="text-on-surface-variant text-label-sm font-bold">0 Words</span>
+            </div>
+            <div class="flex items-center gap-md">
+              
+                <button id="save-draft-btn" class="px-lg py-sm font-label-md text-label-md text-secondary border border-secondary rounded-lg hover:bg-secondary/5 transition-colors active:scale-95">
+                    Save Draft
+                </button>
+                <button id="publish-btn" class="px-xl py-sm font-label-md text-label-md bg-primary text-on-primary rounded-lg shadow-sm hover:brightness-110 transition-all active:scale-95">
+                    Publish
+                </button>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        if (!App.isLoggedIn()) {
+            alert('You must be logged in to access the Editor.');
+            window.location.href = '/Pages/login.html';
+        }
+
+        $(document).ready(function() {
+            const editId = App.getQueryParam('id');
+            let categories = [];
+
+            // Update word count
+            function updateWordCount() {
+                const text = $('#editor-content').text().trim();
+                const words = text ? text.split(/\s+/).length : 0;
+                $('#word-count-text').text(`${words} Words`);
+            }
+
+            $('#editor-content').on('input', updateWordCount);
+
+        function loadCategoriesAndPost() {
+            App.ajax({
+                url: '/api/category',
+                method: 'GET',
+                success: function(response) {
+                    if (response.success && response.data) {
+                        categories = response.data;
+                        const select = $('#editor-category');
+                        select.empty();
+                        categories.forEach(c => {
+                            select.append(`<option value="${c.id}">${c.name}</option>`);
+                        });
+                        
+                        // Categories loaded, now load post if edit mode
+                        if (editId) {
+                            loadPostForEditing();
+                        }
+                    }
+                }
+            });
+        }
+
+        function loadPostForEditing() {
+            App.ajax({
+                url: `/api/blog/${editId}`,
+                method: 'GET',
+                success: function(response) {
+                    if (response.success && response.data) {
+                        const blog = response.data;
+                        $('#editor-title').val(blog.title);
+                        $('#editor-category').val(blog.categoryId);
+                        $('#editor-cover-url').val(blog.coverImageUrl || '');
+                        $('#editor-tags').val(blog.tags ? blog.tags.join(', ') : '');
+                        $('#editor-content').html(blog.content);
+                        updateWordCount();
+                        
+                        document.title = `Edit: ${blog.title} | BS23-Blog`;
+                    }
+                },
+                error: function() {
+                    alert('Failed to load the article for editing.');
+                    window.location.href = '/Pages/dashboard.html';
+                }
+            });
+        }
+
+        function savePost(status) {
+            const title = $('#editor-title').val().trim();
+            const categoryId = parseInt($('#editor-category').val());
+            const content = $('#editor-content').html().trim();
+            const coverUrl = $('#editor-cover-url').val().trim();
+            const tagsText = $('#editor-tags').val().trim();
+            const tags = tagsText ? tagsText.split(',').map(t => t.trim()).filter(t => t) : [];
+
+            if (!title) {
+                alert('Please enter a title.');
+                return;
+            }
+            if (!content) {
+                alert('Please write some content.');
+                return;
+            }
+
+            $('#save-status-icon').text('sync');
+            $('#save-status-text').text('Saving...');
+
+            // Strip HTML tags for the plain-text excerpt on home/dashboard cards
+            const plainText = content.replace(/<[^>]*>/g, '');
+            const excerpt = plainText.substring(0, 150) + (plainText.length > 150 ? '...' : '');
+
+            const payload = {
+                title: title,
+                content: content,
+                excerpt: excerpt,
+                coverImageUrl: coverUrl || null,
+                categoryId: categoryId,
+                tags: tags,
+                status: status
+            };
+
+            const url = editId ? `/api/blog/${editId}` : '/api/blog';
+            const method = editId ? 'PUT' : 'POST';
+
+            App.ajax({
+                url: url,
+                method: method,
+                contentType: 'application/json',
+                data: JSON.stringify(payload),
+                success: function(res) {
+                    $('#save-status-icon').text('cloud_done');
+                    $('#save-status-text').text(status === 'Published' ? 'Published successfully' : 'Draft saved');
+                    alert(`Story ${status === 'Published' ? 'published' : 'saved as draft'} successfully!`);
+                    window.location.href = '/Pages/dashboard.html';
+                },
+                error: function(xhr) {
+                    $('#save-status-icon').text('error');
+                    $('#save-status-text').text('Save failed');
+                    alert(xhr.responseJSON?.message || 'Error occurred while saving.');
+                }
+            });
+        }
+
+        $('#save-draft-btn').on('click', () => savePost('Draft'));
+        $('#publish-btn').on('click', () => savePost('Published'));
+
+        // AI Enhancer helper
+        function callAiEnhance(grammar, clarity) {
+            const content = $('#editor-content').html().trim();
+            if (!content) {
+                alert('Please write some content in the editor first.');
+                return;
+            }
+
+            const tone = $('#ai-tone-select').val();
+            const container = $('#ai-suggestions-container');
+            container.html('<span class="flex items-center gap-xs italic text-label-md text-primary"><span class="material-symbols-outlined animate-spin text-sm">progress_activity</span> AI is working...</span>');
+
+            App.ajax({
+                url: '/api/ai/enhance',
+                method: 'POST',
+                contentType: 'application/json',
+                data: JSON.stringify({
+                    content: content,
+                    tone: tone,
+                    improveGrammar: grammar,
+                    improveClarity: clarity,
+                    improveFlow: true
+                }),
+                success: function(response) {
+                    if (response.success && response.data) {
+                        const enhancedText = response.data;
+                        container.html(`
+                            <div class="p-sm bg-surface-container-lowest rounded-lg border border-outline-variant shadow-sm space-y-sm">
+                                <p class="text-body-sm text-on-surface line-clamp-6 whitespace-pre-wrap">${enhancedText}</p>
+                                <div class="flex justify-end gap-sm pt-base border-t border-outline-variant/30">
+                                    <button id="apply-ai-btn" class="bg-primary text-on-primary font-bold text-label-sm px-md py-base rounded hover:opacity-90 transition-all">
+                                        Apply Changes
+                                    </button>
+                                </div>
+                            </div>
+                        `);
+
+                        $('#apply-ai-btn').on('click', function() {
+                            $('#editor-content').html(enhancedText);
+                            updateWordCount();
+                            container.html('<div class="text-success text-label-sm font-bold flex items-center gap-xs"><span class="material-symbols-outlined text-[16px]">check</span> AI suggestion applied successfully!</div>');
+                        });
+                    } else {
+                        container.text('Failed to enhance content.');
+                    }
+                },
+                error: function() {
+                    container.text('Error occurred during AI processing.');
+                }
+            });
+        }
+
+        $('#ai-btn-grammar').on('click', () => callAiEnhance(true, false));
+        $('#ai-btn-clarity').on('click', () => callAiEnhance(false, true));
+
+        // Generate Ideas Chat Call
+        $('#ai-btn-ideas').on('click', function() {
+            const title = $('#editor-title').val().trim() || "untitled post";
+            const container = $('#ai-suggestions-container');
+            container.html('<span class="flex items-center gap-xs italic text-label-md text-primary"><span class="material-symbols-outlined animate-spin text-sm">progress_activity</span> Sparking ideas...</span>');
+
+            App.ajax({
+                url: '/api/ai/chat',
+                method: 'POST',
+                contentType: 'application/json',
+                data: JSON.stringify({
+                    message: `Generate 3 catchy outline concepts or title suggestions based on this topic title: "${title}". Make it short and professional.`,
+                    history: []
+                }),
+                success: function(response) {
+                    if (response.success && response.data) {
+                        container.html(`
+                            <div class="p-sm bg-surface-container-lowest rounded-lg border border-outline-variant/30 text-label-md text-on-surface whitespace-pre-wrap leading-relaxed">
+${response.data}
+                            </div>
+                        `);
+                    } else {
+                        container.text('Failed to generate ideas.');
+                    }
+                },
+                error: function() {
+                    container.text('Error calling AI to spark ideas.');
+                }
+            });
+        });
+
+            // Selection wrapping helper
+            function wrapSelection(before, after) {
+                const editor = document.getElementById('editor-content');
+                const selection = window.getSelection();
+
+                if (selection.toString().length === 0) {
+                    alert('Please select some text first.');
+                    return;
+                }
+
+                const range = selection.getRangeAt(0);
+                const span = document.createElement('span');
+                span.innerHTML = before + selection.toString() + after;
+                range.deleteContents();
+                range.insertNode(span);
+
+                editor.focus();
+                updateWordCount();
+            }
+
+            // List creation helper
+            function applyList() {
+                const selection = window.getSelection();
+
+                if (selection.toString().length === 0) {
+                    alert('Please select some text first.');
+                    return;
+                }
+
+                const range = selection.getRangeAt(0);
+                const selectedText = selection.toString();
+                const lines = selectedText.split('\n');
+                let listHTML = '<ul>';
+                lines.forEach(line => {
+                    if (line.trim()) {
+                        listHTML += `<li>${line.trim()}</li>`;
+                    }
+                });
+                listHTML += '</ul>';
+
+                const span = document.createElement('span');
+                span.innerHTML = listHTML;
+                range.deleteContents();
+                range.insertNode(span);
+
+                const editor = document.getElementById('editor-content');
+                editor.focus();
+                updateWordCount();
+            }
+
+            // Toolbar bindings
+            $('#btn-bold').on('click', () => wrapSelection('<strong>', '</strong>'));
+            $('#btn-italic').on('click', () => wrapSelection('<em>', '</em>'));
+            $('#btn-underline').on('click', () => wrapSelection('<u>', '</u>'));
+            $('#btn-h1').on('click', () => wrapSelection('<h1>', '</h1>'));
+            $('#btn-h2').on('click', () => wrapSelection('<h2>', '</h2>'));
+            $('#btn-list').on('click', () => applyList());
+            $('#btn-quote').on('click', () => wrapSelection('<blockquote>\n', '\n</blockquote>'));
+
+            $('#btn-image').on('click', function() {
+                const url = prompt('Enter image URL:');
+                if (url) {
+                    const editor = document.getElementById('editor-content');
+                    const img = document.createElement('img');
+                    img.src = url;
+                    img.alt = 'Post image';
+                    img.className = 'rounded-lg my-md max-w-full';
+
+                    const selection = window.getSelection();
+                    if (selection.toString().length > 0) {
+                        const range = selection.getRangeAt(0);
+                        range.deleteContents();
+                        range.insertNode(img);
+                    } else {
+                        editor.appendChild(img);
+                    }
+                    editor.focus();
+                    updateWordCount();
+                }
+            });
+
+            $('#btn-link').on('click', function() {
+                const url = prompt('Enter link URL:');
+                if (url) {
+                    const selection = window.getSelection();
+
+                    if (selection.toString().length === 0) {
+                        alert('Please select some text first.');
+                        return;
+                    }
+
+                    const range = selection.getRangeAt(0);
+                    const link = document.createElement('a');
+                    link.href = url;
+                    link.className = 'text-primary hover:underline';
+                    link.target = '_blank';
+                    link.textContent = selection.toString();
+
+                    range.deleteContents();
+                    range.insertNode(link);
+
+                    const editor = document.getElementById('editor-content');
+                    editor.focus();
+                    updateWordCount();
+                }
+            });
+
+            $('#btn-code').on('click', () => wrapSelection('<pre><code>', '</code></pre>'));
+
+            // Toggle AI Panel
+            $('#toggle-ai-btn').on('click', function() {
+                const panel = $('#ai-panel');
+                if (panel.hasClass('hidden')) {
+                    panel.removeClass('hidden');
+                    if (window.innerWidth < 1280) {
+                        panel.addClass('fixed right-0 top-16 bottom-20 z-40 shadow-2xl border-l flex w-80');
+                    } else {
+                        panel.addClass('flex');
+                    }
+                } else {
+                    panel.addClass('hidden').removeClass('fixed right-0 top-16 bottom-20 z-40 shadow-2xl border-l flex w-80');
+                }
+            });
+
+            $('#close-ai-panel-btn').on('click', function() {
+                $('#ai-panel').addClass('hidden').removeClass('fixed right-0 top-16 bottom-20 z-40 shadow-2xl border-l flex w-80');
+            });
+
+            loadCategoriesAndPost();
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Blog Detail | BS23-Blog</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script src="/jquery/jquery.min.js"></script>
+    <script src="/js/app.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&amp;display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet" />
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "error": "#ba1a1a",
+                        "surface-container-low": "#f2f4f6",
+                        "on-primary-fixed-variant": "#343d96",
+                        "on-tertiary-fixed": "#390c00",
+                        "surface-container-lowest": "#ffffff",
+                        "inverse-on-surface": "#eff1f3",
+                        "surface-bright": "#f7f9fb",
+                        "inverse-primary": "#bdc2ff",
+                        "on-primary": "#ffffff",
+                        "on-secondary": "#ffffff",
+                        "error-container": "#ffdad6",
+                        "background": "#f7f9fb",
+                        "on-primary-container": "#8690ee",
+                        "on-error-container": "#93000a",
+                        "on-tertiary-fixed-variant": "#7b2e12",
+                        "primary-fixed": "#e0e0ff",
+                        "tertiary-fixed": "#ffdbd0",
+                        "on-tertiary": "#ffffff",
+                        "on-surface": "#191c1e",
+                        "on-primary-fixed": "#000767",
+                        "on-tertiary-container": "#e17c5a",
+                        "surface-container-highest": "#e0e3e5",
+                        "on-error": "#ffffff",
+                        "tertiary": "#380b00",
+                        "surface-container": "#eceef0",
+                        "tertiary-container": "#5c1800",
+                        "on-secondary-fixed-variant": "#3a485b",
+                        "secondary-container": "#d5e3fc",
+                        "secondary-fixed-dim": "#b9c7df",
+                        "on-surface-variant": "#454652",
+                        "primary-container": "#1a237e",
+                        "surface-tint": "#4c56af",
+                        "surface": "#f7f9fb",
+                        "secondary": "#515f74",
+                        "on-secondary-fixed": "#0d1c2e",
+                        "surface-variant": "#e0e3e5",
+                        "inverse-surface": "#2d3133",
+                        "primary-fixed-dim": "#bdc2ff",
+                        "outline-variant": "#c6c5d4",
+                        "secondary-fixed": "#d5e3fc",
+                        "surface-container-high": "#e6e8ea",
+                        "primary": "#000666",
+                        "on-secondary-container": "#57657a",
+                        "surface-dim": "#d8dadc",
+                        "on-background": "#191c1e",
+                        "outline": "#767683",
+                        "tertiary-fixed-dim": "#ffb59d",
+                        "container-max": "1280px"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "md": "16px",
+                        "margin-desktop": "48px",
+                        "gutter": "24px",
+                        "xs": "4px",
+                        "margin-mobile": "16px",
+                        "base": "4px",
+                        "lg": "24px",
+                        "xl": "32px",
+                        "sm": "8px",
+                        "container-max": "1280px"
+                    },
+                    "fontFamily": {
+                        "body-md": ["Inter"],
+                        "body-sm": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "headline-xl-mobile": ["Inter"],
+                        "headline-lg": ["Inter"],
+                        "headline-xl": ["Inter"],
+                        "label-sm": ["Inter"],
+                        "headline-sm": ["Inter"],
+                        "headline-md": ["Inter"],
+                        "label-md": ["Inter"],
+                        "display": ["Inter"]
+                    },
+                    "fontSize": {
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                        "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                        "headline-xl-mobile": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "headline-lg": ["30px", {"lineHeight": "38px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                        "headline-xl": ["40px", {"lineHeight": "48px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "label-sm": ["12px", {"lineHeight": "14px", "letterSpacing": "0.02em", "fontWeight": "500"}],
+                        "headline-sm": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                        "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                        "label-md": ["14px", {"lineHeight": "16px", "letterSpacing": "0.01em", "fontWeight": "500"}],
+                        "display": ["48px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "800"}]
+                    }
+                },
+            },
+        }
+    </script>
+    <style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+
+        .prose blockquote {
+            border-left: 4px solid #1a1b2f;
+            padding-left: 1.5rem;
+            font-style: italic;
+            color: #4b5563;
+            margin: 1.5rem 0;
+            white-space: normal;
+        }
+
+        .prose h1 {
+            font-size: 2rem;
+            font-weight: 800;
+            margin-top: 1.75rem;
+            margin-bottom: 0.75rem;
+            color: #111827;
+            line-height: 1.25;
+            white-space: normal;
+        }
+
+        .prose h2 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-top: 1.5rem;
+            margin-bottom: 0.5rem;
+            color: #1f2937;
+            line-height: 1.3;
+            white-space: normal;
+        }
+
+        .prose ul {
+            list-style-type: disc;
+            padding-left: 1.5rem;
+            margin-top: 0.75rem;
+            margin-bottom: 0.75rem;
+            white-space: normal;
+        }
+
+        .prose li {
+            margin-bottom: 0.35rem;
+            white-space: normal;
+        }
+
+        .prose strong {
+            font-weight: 700;
+            color: #111827;
+        }
+
+        .prose em {
+            font-style: italic;
+        }
+
+        .prose u {
+            text-decoration: underline;
+        }
+
+        .prose pre {
+            background-color: #f3f4f6;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            overflow-x: auto;
+            margin: 1.25rem 0;
+            border: 1px solid #e5e7eb;
+            white-space: pre;
+        }
+
+        .prose code {
+            font-family: monospace;
+            background-color: #f3f4f6;
+            padding: 0.2rem 0.4rem;
+            border-radius: 0.25rem;
+            font-size: 0.875em;
+            color: #ef4444;
+            white-space: pre-wrap;
+        }
+
+        .prose pre code {
+            background-color: transparent;
+            padding: 0;
+            border-radius: 0;
+            font-size: 1em;
+            color: #1f2937;
+            white-space: pre;
+        }
+
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+
+        .hide-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+</head>
+<body class="bg-surface text-on-surface font-body-md selection:bg-primary-fixed selection:text-on-primary-fixed">
+    <!-- TopAppBar -->
+    <header class="bg-surface-container-lowest border-b border-outline-variant shadow-sm docked full-width top-0 z-50 sticky">
+        <div class="flex justify-between items-center w-full px-md h-16 max-w-container-max mx-auto">
+            <div class="font-display text-headline-lg font-extrabold text-primary cursor-pointer" onclick="window.location.href='/index.html'">BS23-Blog</div>
+            <nav class="hidden md:flex items-center gap-md">
+                <a class="text-on-surface-variant hover:text-primary hover:bg-surface-container-low transition-colors duration-200 cursor-pointer active:opacity-80" href="/index.html">Home</a>
+                <a class="text-on-surface-variant hover:text-primary hover:bg-surface-container-low transition-colors duration-200 cursor-pointer active:opacity-80" href="/index.html#categories-list">Categories</a>
+                <a class="text-on-surface-variant hover:text-primary hover:bg-surface-container-low transition-colors duration-200 cursor-pointer active:opacity-80" href="#">About</a>
+            </nav>
+            <div id="auth-buttons-container" class="flex items-center gap-sm">
+            </div>
+        </div>
+    </header>
+    <main class="max-w-container-max mx-auto px-md py-lg lg:grid lg:grid-cols-12 lg:gap-gutter">
+        <!-- Main Content Area -->
+        <article class="lg:col-span-8 max-w-[720px] mx-auto lg:mx-0">
+            <!-- Breadcrumbs -->
+            <nav id="blog-breadcrumbs" class="flex items-center gap-xs text-on-surface-variant font-label-sm mb-base uppercase tracking-widest">
+                <!-- Dynamic categories -->
+            </nav>
+            <!-- Headline -->
+            <h1 id="blog-title" class="font-display text-headline-lg lg:text-headline-xl mb-md text-on-background leading-tight">
+                Loading article...
+            </h1>
+            <!-- Author Meta -->
+            <div class="flex items-center gap-md mb-lg p-base bg-surface-container-low rounded-xl border border-outline-variant/30">
+                <div class="w-12 h-12 rounded-full bg-primary-container text-on-primary-container flex items-center justify-center font-bold text-headline-sm uppercase" id="author-avatar-fallback">B</div>
+                <img id="author-avatar" alt="Author" class="w-12 h-12 rounded-full object-cover border-2 border-primary-fixed hidden" src="" />
+                <div>
+                    <p id="author-name" class="font-headline-sm text-on-surface leading-none">Loading...</p>
+                    <p id="blog-meta-date" class="font-label-sm text-on-surface-variant mt-1"></p>
+                </div>
+            </div>
+            <!-- Main Blog Image -->
+            <figure id="blog-cover-container" class="mb-lg overflow-hidden rounded-xl shadow-md hidden">
+                <img id="blog-cover-img" alt="Blog Cover" class="w-full aspect-video object-cover" src="" />
+            </figure>
+            <!-- Rich Text Content -->
+            <div id="blog-content" class="prose max-w-none text-body-lg text-on-surface space-y-md leading-relaxed whitespace-pre-wrap">
+                <!-- Content goes here -->
+            </div>
+            <!-- About the Author -->
+            <section id="author-section" class="mt-xl p-lg bg-surface-container-lowest rounded-xl border border-outline-variant shadow-sm hidden">
+                <h3 class="font-headline-md mb-md border-b border-outline-variant pb-base">About the Author</h3>
+                <div class="flex flex-col md:flex-row gap-md items-start">
+                    <div class="w-24 h-24 rounded-xl bg-secondary-container text-on-secondary-container flex items-center justify-center font-bold text-headline-lg uppercase" id="author-bio-avatar-fallback">B</div>
+                    <img id="author-bio-avatar" alt="Author" class="w-24 h-24 rounded-xl object-cover hidden" src="" />
+                    <div>
+                        <p id="author-bio-name" class="font-headline-sm text-on-surface">Author Name</p>
+                        <p id="author-bio-text" class="text-body-md text-on-surface-variant mt-base">
+                            This author is a key contributor to our knowledge base.
+                        </p>
+                    </div>
+                </div>
+            </section>
+            <!-- Comments Section -->
+            <section class="mt-xl">
+                <div class="flex justify-between items-end mb-lg">
+                    <h3 id="comments-count-title" class="font-headline-md text-on-background">Discussion (0)</h3>
+                </div>
+                <div id="comments-list" class="space-y-md">
+                    <!-- Dynamic comments will go here -->
+                </div>
+                <!-- Add Comment Form -->
+                <div class="mt-lg p-md bg-surface-container-low rounded-xl border border-outline-variant">
+                    <h4 class="font-headline-sm mb-md text-on-surface">Add a comment</h4>
+                    <form id="comment-form" class="space-y-md">
+                        <textarea id="comment-textarea" class="w-full bg-surface-container-lowest border border-outline-variant focus:ring-2 focus:ring-primary focus:border-primary outline-none rounded-lg p-md text-body-md transition-shadow" placeholder="What are your thoughts on this article?" rows="4" required></textarea>
+                        <div class="flex justify-end">
+                            <button id="post-comment-btn" class="bg-primary text-on-primary px-lg py-base rounded-lg font-label-md hover:opacity-90 active:scale-95 transition-all" type="submit">Post Comment</button>
+                        </div>
+                    </form>
+                </div>
+            </section>
+        </article>
+        <!-- Sidebar: Related Posts -->
+        <aside class="hidden lg:block lg:col-span-4">
+            <div class="sticky top-md space-y-md">
+                <!-- AI Summary Panel -->
+                <div class="p-md bg-surface-container-lowest border-2 border-primary/20 rounded-xl shadow-lg relative overflow-hidden group">
+                    <div class="absolute top-0 right-0 p-2 opacity-10 group-hover:opacity-30 transition-opacity">
+                        <span class="material-symbols-outlined text-primary text-[40px]">auto_awesome</span>
+                    </div>
+                    <div class="relative z-10">
+                        <div class="flex items-center gap-base mb-base text-primary">
+                            <span class="material-symbols-outlined text-[20px]">auto_awesome</span>
+                            <span class="font-label-sm uppercase tracking-tighter">AI Summary</span>
+                        </div>
+                        <p id="ai-summary-text" class="text-body-md text-on-surface-variant leading-snug">
+                            Please log in to generate an AI summary.
+                        </p>
+                    </div>
+                </div>
+             
+               
+                <!-- Newsletter CTA -->
+              
+            </div>
+        </aside>
+    </main>
+    <!-- Footer -->
+    <footer class="bg-surface-container-lowest border-t border-outline-variant mt-xl">
+        <div class="flex flex-col md:flex-row justify-between items-center px-md py-lg max-w-container-max mx-auto">
+            <div class="font-display text-headline-md text-on-surface mb-md md:mb-0">BS23-Blog</div>
+            <div class="flex gap-md mb-md md:mb-0">
+                <a class="text-on-surface-variant hover:text-primary transition-colors font-label-sm underline-offset-4 hover:underline" href="#">Privacy Policy</a>
+                <a class="text-on-surface-variant hover:text-primary transition-colors font-label-sm underline-offset-4 hover:underline" href="#">Terms</a>
+                <a class="text-on-surface-variant hover:text-primary transition-colors font-label-sm underline-offset-4 hover:underline" href="#">Careers</a>
+                <a class="text-on-surface-variant hover:text-primary transition-colors font-label-sm underline-offset-4 hover:underline" href="#">Contact</a>
+            </div>
+            <div class="text-on-surface-variant font-label-sm">
+                ©  BS23-Blog Inc. All rights reserved.
+            </div>
+        </div>
+    </footer>
+    <!-- Progress Indicator -->
+    <div class="fixed top-0 left-0 h-1 bg-primary z-[60] transition-all duration-100" id="progress-bar" style="width: 0%"></div>
+    <script>
+        const blogId = App.getQueryParam('id');
+        let currentBlog = null;
+
+        // Reading Progress Script
+        window.addEventListener('scroll', () => {
+            const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrolled = (winScroll / height) * 100;
+            document.getElementById('progress-bar').style.width = scrolled + "%";
+        });
+
+        function loadBlogDetails() {
+            if (!blogId) {
+                alert('No article ID specified!');
+                window.location.href = '/index.html';
+                return;
+            }
+
+            App.ajax({
+                url: `/api/blog/${blogId}`,
+                method: 'GET',
+                success: function(response) {
+                    if (response.success && response.data) {
+                        const blog = response.data;
+                        currentBlog = blog;
+                        
+                        // Breadcrumbs
+                        $('#blog-breadcrumbs').html(`
+                            <a href="/index.html" class="hover:text-primary transition-colors">Home</a>
+                            <span class="material-symbols-outlined text-[14px]">chevron_right</span>
+                            <a href="/index.html?category=${blog.categoryId}" class="hover:text-primary transition-colors">${blog.categoryName}</a>
+                            <span class="material-symbols-outlined text-[14px]">chevron_right</span>
+                            <span>Article</span>
+                        `);
+
+                        // Titles and Title Header
+                        $('#blog-title').text(blog.title);
+                        document.title = `${blog.title} | BS23-Blog`;
+
+                        // Author details
+                        const authorInitial = blog.authorName ? blog.authorName.charAt(0).toUpperCase() : 'B';
+                        $('#author-avatar-fallback').text(authorInitial);
+                        $('#author-name').html(`By <strong class="text-on-surface">${blog.authorName}</strong>`);
+                        const dateStr = new Date(blog.createdAt).toLocaleDateString(undefined, { month: 'short', day: 'numeric', year: 'numeric' });
+                        $('#blog-meta-date').text(`${dateStr}`);
+
+                        // Author Bio Section
+                        $('#author-section').removeClass('hidden');
+                        $('#author-bio-avatar-fallback').text(authorInitial);
+                        $('#author-bio-name').text(blog.authorName);
+
+                        // Cover Image
+                        if (blog.coverImageUrl) {
+                            $('#blog-cover-img').attr('src', blog.coverImageUrl).attr('alt', blog.title);
+                            $('#blog-cover-container').removeClass('hidden');
+                        }
+
+                        // Rich content
+                        $('#blog-content').html(blog.content);
+
+                        // Fetch related and AI summary
+                        loadRelatedBlogs(blog.categoryId);
+                        loadAiSummary(blog.content);
+                    } else {
+                        $('#blog-title').text('Article not found.');
+                    }
+                },
+                error: function() {
+                    $('#blog-title').text('Failed to load article details.');
+                }
+            });
+        }
+
+        function loadRelatedBlogs(categoryId) {
+            App.ajax({
+                url: `/api/blog/category/${categoryId}?page=1&pageSize=4`,
+                method: 'GET',
+                success: function(response) {
+                    const list = $('#related-articles');
+                    list.empty();
+                    if (response.success && response.data) {
+                        const relatedBlogs = Array.isArray(response.data) ? response.data : (response.data.blogs || []);
+                        const filtered = relatedBlogs.filter(b => b.id !== parseInt(blogId)).slice(0, 2);
+                        if (filtered.length === 0) {
+                            list.html('<p class="text-label-sm text-on-surface-variant italic px-base">No related articles found.</p>');
+                            return;
+                        }
+                        filtered.forEach(b => {
+                            const cover = b.coverImageUrl || 'https://images.unsplash.com/photo-1499750310107-5fef28a66643?w=800&auto=format&fit=crop&q=60';
+                            list.append(`
+                                <a class="group block p-base bg-surface-container-lowest border border-outline-variant rounded-xl hover:border-primary hover:shadow-md transition-all" href="/Pages/blog-detail.html?id=${b.id}">
+                                    <img alt="${b.title}" class="w-full h-32 object-cover rounded-lg mb-base" src="${cover}" />
+                                    <span class="font-label-sm text-secondary uppercase">${b.categoryName}</span>
+                                    <h4 class="font-label-md text-on-surface mt-xs group-hover:text-primary transition-colors line-clamp-2">${b.title}</h4>
+                                </a>
+                            `);
+                        });
+                    }
+                }
+            });
+        }
+
+        function loadAiSummary(content) {
+            if (!App.isLoggedIn()) {
+                $('#ai-summary-text').html('<a href="/Pages/login.html" class="text-primary font-bold hover:underline">Log in</a> to view an AI-generated summary of this article.');
+                return;
+            }
+
+            $('#ai-summary-text').html('<span class="flex items-center gap-xs"><span class="material-symbols-outlined animate-spin text-sm">progress_activity</span> Generating AI summary...</span>');
+            const plainContent = $('<div>').html(content || '').text().replace(/\s+/g, ' ').trim();
+            const summaryContent = plainContent.length > 12000 ? plainContent.substring(0, 12000) : plainContent;
+
+            App.ajax({
+                url: '/api/ai/chat',
+                method: 'POST',
+                contentType: 'application/json',
+                data: JSON.stringify({
+                    message: 'Please summarize this blog content in 2 sentences.',
+                    blogContent: summaryContent,
+                    history: []
+                }),
+                success: function(response) {
+                    if (response.success && response.data) {
+                        $('#ai-summary-text').text(response.data);
+                    } else {
+                        $('#ai-summary-text').text('Unable to generate AI summary at this time.');
+                    }
+                },
+                error: function() {
+                    $('#ai-summary-text').text('Error connecting to AI service for summary.');
+                }
+            });
+        }
+
+        function loadComments() {
+            App.ajax({
+                url: `/api/comment/blog/${blogId}`,
+                method: 'GET',
+                success: function(response) {
+                    if (response.success && response.data) {
+                        const comments = response.data;
+                        $('#comments-count-title').text(`Discussion (${comments.length})`);
+                        
+                        const container = $('#comments-list');
+                        container.empty();
+
+                        if (comments.length === 0) {
+                            container.html('<p class="text-on-surface-variant py-md italic px-base">No comments yet. Be the first to start the discussion!</p>');
+                            return;
+                        }
+
+                        const currentUser = App.getCurrentUser();
+
+                        comments.forEach(c => {
+                            const dateStr = new Date(c.createdAt).toLocaleDateString(undefined, { month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' });
+                            const initial = c.authorName ? c.authorName.charAt(0).toUpperCase() : 'U';
+                            
+                            // Check if author matches current user, or user is admin
+                            const canDelete = currentUser && (currentUser.id === c.authorId || currentUser.role === 'Admin');
+                            const deleteBtn = canDelete 
+                                ? `<button class="text-error hover:underline text-label-sm font-bold flex items-center gap-xs delete-comment-btn" data-id="${c.id}">
+                                     <span class="material-symbols-outlined text-[16px]">delete</span> Delete
+                                   </button>` 
+                                : '';
+
+                            container.append(`
+                                <div class="p-md border-b border-outline-variant/30 hover:bg-surface-container-low transition-colors rounded-lg flex flex-col justify-between">
+                                    <div>
+                                        <div class="flex items-center gap-base mb-base">
+                                            <div class="w-8 h-8 rounded-full bg-secondary-container text-on-secondary-container flex items-center justify-center font-bold text-xs uppercase">${initial}</div>
+                                            <span class="font-label-md text-on-surface font-semibold">${c.authorName}</span>
+                                            <span class="text-label-sm text-on-surface-variant">${dateStr}</span>
+                                        </div>
+                                        <p class="text-body-md text-on-surface-variant whitespace-pre-wrap pl-10">${c.content}</p>
+                                    </div>
+                                    <div class="flex justify-end gap-md mt-sm pr-md">
+                                        ${deleteBtn}
+                                    </div>
+                                </div>
+                            `);
+                        });
+
+                        // Bind delete actions
+                        $('.delete-comment-btn').on('click', function() {
+                            const cid = $(this).data('id');
+                            if (confirm('Are you sure you want to delete this comment?')) {
+                                App.ajax({
+                                    url: `/api/comment/${cid}`,
+                                    method: 'DELETE',
+                                    success: function() {
+                                        loadComments();
+                                    },
+                                    error: function(xhr) {
+                                        alert(xhr.responseJSON?.message || 'Failed to delete comment.');
+                                    }
+                                });
+                            }
+                        });
+                    }
+                }
+            });
+        }
+
+        // Add Comment Form Submit
+        $('#comment-form').on('submit', function(e) {
+            e.preventDefault();
+            if (!App.isLoggedIn()) {
+                alert('You must be logged in to post comments.');
+                window.location.href = '/Pages/login.html';
+                return;
+            }
+
+            const text = $('#comment-textarea').val().trim();
+            if (!text) return;
+
+            $('#post-comment-btn').prop('disabled', true).text('Posting...');
+
+            App.ajax({
+                url: '/api/comment',
+                method: 'POST',
+                contentType: 'application/json',
+                data: JSON.stringify({
+                    content: text,
+                    blogId: parseInt(blogId)
+                }),
+                success: function() {
+                    $('#comment-textarea').val('');
+                    loadComments();
+                },
+                error: function(xhr) {
+                    alert(xhr.responseJSON?.message || 'Error posting comment.');
+                },
+                complete: function() {
+                    $('#post-comment-btn').prop('disabled', false).text('Post Comment');
+                }
+            });
+        });
+
+        $(document).ready(function() {
+            loadBlogDetails();
+            loadComments();
+        });
+    </script>
+</body>
+</html>

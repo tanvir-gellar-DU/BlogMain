@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Login | BS23-Blog</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script src="/jquery/jquery.min.js"></script>
+    <script src="/js/app.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet" />
+    <script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                "error": "#ba1a1a",
+                "surface-container-low": "#f2f4f6",
+                "on-primary-fixed-variant": "#343d96",
+                "on-tertiary-fixed": "#390c00",
+                "surface-container-lowest": "#ffffff",
+                "inverse-on-surface": "#eff1f3",
+                "surface-bright": "#f7f9fb",
+                "inverse-primary": "#bdc2ff",
+                "on-primary": "#ffffff",
+                "on-secondary": "#ffffff",
+                "error-container": "#ffdad6",
+                "background": "#f7f9fb",
+                "on-primary-container": "#8690ee",
+                "on-error-container": "#93000a",
+                "on-tertiary-fixed-variant": "#7b2e12",
+                "primary-fixed": "#e0e0ff",
+                "tertiary-fixed": "#ffdbd0",
+                "on-tertiary": "#ffffff",
+                "on-surface": "#191c1e",
+                "on-primary-fixed": "#000767",
+                "on-tertiary-container": "#e17c5a",
+                "surface-container-highest": "#e0e3e5",
+                "on-error": "#ffffff",
+                "tertiary": "#380b00",
+                "surface-container": "#eceef0",
+                "tertiary-container": "#5c1800",
+                "on-secondary-fixed-variant": "#3a485b",
+                "secondary-container": "#d5e3fc",
+                "secondary-fixed-dim": "#b9c7df",
+                "on-surface-variant": "#454652",
+                "primary-container": "#1a237e",
+                "surface-tint": "#4c56af",
+                "surface": "#f7f9fb",
+                "secondary": "#515f74",
+                "on-secondary-fixed": "#0d1c2e",
+                "surface-variant": "#e0e3e5",
+                "inverse-surface": "#2d3133",
+                "primary-fixed-dim": "#bdc2ff",
+                "outline-variant": "#c6c5d4",
+                "secondary-fixed": "#d5e3fc",
+                "surface-container-high": "#e6e8ea",
+                "primary": "#000666",
+                "on-secondary-container": "#57657a",
+                "surface-dim": "#d8dadc",
+                "on-background": "#191c1e",
+                "outline": "#767683",
+                "tertiary-fixed-dim": "#ffb59d"
+            },
+            "borderRadius": {
+                "DEFAULT": "0.25rem",
+                "lg": "0.5rem",
+                "xl": "0.75rem",
+                "full": "9999px"
+            },
+            "spacing": {
+                "md": "16px",
+                "margin-desktop": "48px",
+                "gutter": "24px",
+                "xs": "4px",
+                "margin-mobile": "16px",
+                "base": "4px",
+                "lg": "24px",
+                "xl": "32px",
+                "sm": "8px"
+            },
+            "fontFamily": {
+                "body-md": ["Inter"],
+                "body-sm": ["Inter"],
+                "body-lg": ["Inter"],
+                "headline-xl-mobile": ["Inter"],
+                "headline-lg": ["Inter"],
+                "headline-xl": ["Inter"],
+                "label-sm": ["Inter"],
+                "headline-sm": ["Inter"],
+                "headline-md": ["Inter"],
+                "label-md": ["Inter"]
+            },
+            "fontSize": {
+                "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                "headline-xl-mobile": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                "headline-lg": ["30px", {"lineHeight": "38px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                "headline-xl": ["40px", {"lineHeight": "48px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                "label-sm": ["12px", {"lineHeight": "14px", "letterSpacing": "0.02em", "fontWeight": "500"}],
+                "headline-sm": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                "label-md": ["14px", {"lineHeight": "16px", "letterSpacing": "0.01em", "fontWeight": "500"}]
+            }
+          },
+        },
+      }
+    </script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f7f9fb;
+            background-image: radial-gradient(at 0% 0%, rgba(0, 6, 102, 0.03) 0px, transparent 50%), radial-gradient(at 100% 100%, rgba(81, 95, 116, 0.03) 0px, transparent 50%);
+        }
+
+        .login-card {
+            box-shadow: 0px 4px 20px rgba(0, 6, 102, 0.04);
+            border: 1px solid #e0e3e5;
+        }
+
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col justify-center items-center p-md">
+    <main class="w-full max-w-[440px] animate-in fade-in slide-in-from-bottom-4 duration-700">
+        <!-- Logo Section -->
+        <div class="flex flex-col items-center mb-lg">
+            <div class="mb-sm flex items-center justify-center w-12 h-12 rounded-xl bg-primary-container text-on-primary-container shadow-sm">
+                <span class="material-symbols-outlined text-3xl" style="font-variation-settings: 'FILL' 1;">auto_stories</span>
+            </div>
+            <h1 class="font-headline-lg text-primary tracking-tight">BS23-Blog</h1>
+            <p class="font-body-md text-on-surface-variant mt-xs">Welcome back, creator.</p>
+        </div>
+        <!-- Login Card -->
+        <div class="login-card bg-surface-container-lowest rounded-xl p-lg md:p-xl">
+            <form class="space-y-md" id="loginForm">
+                <!-- Email Field -->
+                <div class="space-y-base">
+                    <label class="font-label-md text-on-surface-variant block" for="email">Email Address</label>
+                    <div class="relative group">
+                        <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline group-focus-within:text-primary transition-colors">mail</span>
+                        <input class="w-full pl-10 pr-base py-3 bg-surface-container border border-transparent rounded-lg font-body-md text-on-surface focus:ring-2 focus:ring-primary focus:bg-white transition-all placeholder:text-outline" id="email" placeholder="name@company.com" required="" type="email" />
+                    </div>
+                </div>
+                <!-- Password Field -->
+                <div class="space-y-base">
+                    <div class="flex justify-between items-center">
+                        <label class="font-label-md text-on-surface-variant block" for="password">Password</label>
+                        <a class="font-label-sm text-secondary hover:text-primary transition-colors hover:underline underline-offset-4" href="#">Forgot Password?</a>
+                    </div>
+                    <div class="relative group">
+                        <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline group-focus-within:text-primary transition-colors">lock</span>
+                        <input class="w-full pl-10 pr-12 py-3 bg-surface-container border border-transparent rounded-lg font-body-md text-on-surface focus:ring-2 focus:ring-primary focus:bg-white transition-all placeholder:text-outline" id="password" placeholder="••••••••" required="" type="password" />
+                        <button class="absolute right-3 top-1/2 -translate-y-1/2 text-outline hover:text-on-surface transition-colors" onclick="togglePassword()" type="button">
+                            <span class="material-symbols-outlined" id="passwordIcon">visibility</span>
+                        </button>
+                    </div>
+                </div>
+                <!-- Remember Me -->
+                <div class="flex items-center gap-sm">
+                    <input class="w-4 h-4 rounded border-outline-variant text-primary focus:ring-primary" id="remember" type="checkbox" />
+                    <label class="font-label-md text-on-surface-variant cursor-pointer" for="remember">Stay logged in for 30 days</label>
+                </div>
+                <!-- Primary Action -->
+                <button class="w-full py-3 px-base bg-primary hover:bg-primary-container text-white font-label-md rounded-lg shadow-sm hover:shadow-md transition-all active:scale-[0.98] flex justify-center items-center gap-sm group" type="submit">
+                    <span>Login</span>
+                    <span class="material-symbols-outlined group-hover:translate-x-1 transition-transform">arrow_forward</span>
+                </button>
+            </form>
+            <!-- Divider -->
+            
+            <!-- Social Login -->
+           
+        </div>
+        <!-- Secondary Action -->
+        <p class="text-center mt-lg font-body-md text-on-surface-variant">
+            Don't have an account?
+            <a class="text-primary font-bold hover:underline underline-offset-4" href="/Pages/register.html">Register</a>
+        </p>
+        <!-- Footer (Subtle) -->
+        <footer class="mt-xl text-center space-y-sm">
+            <div class="flex justify-center gap-md font-label-sm text-outline">
+                <a class="hover:text-on-surface transition-colors" href="#">Privacy Policy</a>
+                <a class="hover:text-on-surface transition-colors" href="#">Terms of Service</a>
+                <a class="hover:text-on-surface transition-colors" href="#">Support</a>
+            </div>
+            <p class="font-label-sm text-outline-variant">© BS23-Blog Inc. Secure Authentication</p>
+        </footer>
+    </main>
+    <!-- AI Ambient Element -->
+    <div class="fixed bottom-lg right-lg animate-pulse opacity-5 pointer-events-none">
+        <div class="w-64 h-64 bg-primary rounded-full filter blur-[100px]"></div>
+    </div>
+    <script>
+        function togglePassword() {
+            const passwordInput = document.getElementById('password');
+            const passwordIcon = document.getElementById('passwordIcon');
+            if (passwordInput.type === 'password') {
+                passwordInput.type = 'text';
+                passwordIcon.innerText = 'visibility_off';
+            } else {
+                passwordInput.type = 'password';
+                passwordIcon.innerText = 'visibility';
+            }
+        }
+
+        $('#loginForm').on('submit', function(e) {
+            e.preventDefault();
+            const email = $('#email').val();
+            const password = $('#password').val();
+            
+            const btn = $(this).find('button[type="submit"]');
+            const originalContent = btn.html();
+            btn.html('<span class="material-symbols-outlined animate-spin">progress_activity</span> Authenticating...').prop('disabled', true);
+
+            $.ajax({
+                url: '/api/auth/login',
+                method: 'POST',
+                contentType: 'application/json',
+                data: JSON.stringify({ email: email, password: password }),
+                success: function(response) {
+                    if (response.success && response.data) {
+                        btn.html('<span class="material-symbols-outlined">check_circle</span> Success');
+                        btn.addClass('bg-primary-container');
+                        
+                        App.setToken(response.data.token, {
+                            userId: response.data.userId,
+                            email: response.data.email,
+                            firstName: response.data.firstName,
+                            lastName: response.data.lastName,
+                            role: response.data.role
+                        });
+                        
+                        App.showToast('Login successful!');
+                        setTimeout(function() {
+                            window.location.href = '/index.html';
+                        }, 1000);
+                    } else {
+                        App.showToast(response.message || 'Login failed.', 'error');
+                        btn.html(originalContent).prop('disabled', false);
+                    }
+                },
+                error: function(xhr) {
+                    const err = xhr.responseJSON ? xhr.responseJSON.message : 'Invalid credentials.';
+                    App.showToast(err, 'error');
+                    btn.html(originalContent).prop('disabled', false).removeClass('bg-primary-container');
+                }
+            });
+        });
+    </script>
+</body>
+</html>

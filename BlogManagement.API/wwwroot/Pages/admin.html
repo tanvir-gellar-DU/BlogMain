@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Blog Admin Dashboard | BS23-Blog</title>
+    <script src="/jquery/jquery.min.js"></script>
+    <script src="/js/app.js"></script>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet" />
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "error": "#ba1a1a",
+                        "surface-container-low": "#f2f4f6",
+                        "on-primary-fixed-variant": "#343d96",
+                        "on-tertiary-fixed": "#390c00",
+                        "surface-container-lowest": "#ffffff",
+                        "inverse-on-surface": "#eff1f3",
+                        "surface-bright": "#f7f9fb",
+                        "inverse-primary": "#bdc2ff",
+                        "on-primary": "#ffffff",
+                        "on-secondary": "#ffffff",
+                        "error-container": "#ffdad6",
+                        "background": "#f7f9fb",
+                        "on-primary-container": "#8690ee",
+                        "on-error-container": "#93000a",
+                        "on-tertiary-fixed-variant": "#7b2e12",
+                        "primary-fixed": "#e0e0ff",
+                        "tertiary-fixed": "#ffdbd0",
+                        "on-tertiary": "#ffffff",
+                        "on-surface": "#191c1e",
+                        "on-primary-fixed": "#000767",
+                        "on-tertiary-container": "#e17c5a",
+                        "surface-container-highest": "#e0e3e5",
+                        "on-error": "#ffffff",
+                        "tertiary": "#380b00",
+                        "surface-container": "#eceef0",
+                        "tertiary-container": "#5c1800",
+                        "on-secondary-fixed-variant": "#3a485b",
+                        "secondary-container": "#d5e3fc",
+                        "secondary-fixed-dim": "#b9c7df",
+                        "on-surface-variant": "#454652",
+                        "primary-container": "#1a237e",
+                        "surface-tint": "#4c56af",
+                        "surface": "#f7f9fb",
+                        "secondary": "#515f74",
+                        "on-secondary-fixed": "#0d1c2e",
+                        "surface-variant": "#e0e3e5",
+                        "inverse-surface": "#2d3133",
+                        "primary-fixed-dim": "#bdc2ff",
+                        "outline-variant": "#c6c5d4",
+                        "secondary-fixed": "#d5e3fc",
+                        "surface-container-high": "#e6e8ea",
+                        "primary": "#000666",
+                        "on-secondary-container": "#57657a",
+                        "surface-dim": "#d8dadc",
+                        "on-background": "#191c1e",
+                        "outline": "#767683",
+                        "tertiary-fixed-dim": "#ffb59d"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "md": "16px",
+                        "margin-desktop": "48px",
+                        "gutter": "24px",
+                        "xs": "4px",
+                        "margin-mobile": "16px",
+                        "base": "4px",
+                        "lg": "24px",
+                        "xl": "32px",
+                        "sm": "8px"
+                    },
+                    "fontFamily": {
+                        "body-md": ["Inter"],
+                        "body-sm": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "headline-xl-mobile": ["Inter"],
+                        "headline-lg": ["Inter"],
+                        "headline-xl": ["Inter"],
+                        "label-sm": ["Inter"],
+                        "headline-sm": ["Inter"],
+                        "headline-md": ["Inter"],
+                        "label-md": ["Inter"]
+                    },
+                    "fontSize": {
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                        "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                        "headline-xl-mobile": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "headline-lg": ["30px", {"lineHeight": "38px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                        "headline-xl": ["40px", {"lineHeight": "48px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "label-sm": ["12px", {"lineHeight": "14px", "letterSpacing": "0.02em", "fontWeight": "500"}],
+                        "headline-sm": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                        "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                        "label-md": ["14px", {"lineHeight": "16px", "letterSpacing": "0.01em", "fontWeight": "500"}]
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+
+        .sidebar-transition {
+            transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+    </style>
+</head>
+<body class="bg-surface-container-lowest text-on-surface">
+    <!-- Sidebar Navigation -->
+    <aside class="h-screen w-64 fixed left-0 top-0 z-40 bg-surface-container-low border-r border-outline-variant flex flex-col py-md space-y-base overflow-y-auto">
+        <div class="px-md mb-lg">
+            <h1 class="font-headline-sm text-headline-sm font-bold text-on-surface">BS23-Blog</h1>
+            <p class="font-label-sm text-label-sm text-on-surface-variant">Admin Portal</p>
+        </div>
+        <nav class="flex-grow">
+            <!-- Active state for Stats/Dashboard -->
+            <a class="flex items-center gap-base bg-secondary-container text-on-secondary-container rounded-lg p-base mx-sm font-bold active:scale-95 transition-all duration-200" href="#">
+                <span class="material-symbols-outlined" data-icon="admin_panel_settings">admin_panel_settings</span>
+                <span class="font-label-md text-label-md">Admin Home</span>
+            </a>
+          
+            <a class="flex items-center gap-base text-on-surface-variant hover:bg-surface-container-highest rounded-lg p-base mx-sm active:scale-95 transition-all duration-200" href="/index.html">
+                <span class="material-symbols-outlined" data-icon="home">home</span>
+                <span class="font-label-md text-label-md">View Site</span>
+            </a>
+        </nav>
+        
+        <div class="mt-auto px-md flex items-center gap-sm">
+            <div id="user-avatar-initial" class="w-10 h-10 rounded-full bg-primary text-on-primary flex items-center justify-center font-bold text-headline-sm uppercase">A</div>
+            <div>
+                <p id="user-display-name" class="font-label-md text-label-md font-bold">Admin</p>
+                <p id="user-display-role" class="font-label-sm text-label-sm text-on-surface-variant">Administrator</p>
+            </div>
+        </div>
+    </aside>
+    <!-- Main Content Area -->
+    <main class="ml-64 min-h-screen">
+        <!-- Top App Bar -->
+        <header class="sticky top-0 z-30 bg-surface border-b border-outline-variant shadow-sm h-16 flex justify-between items-center px-md w-full">
+            <div class="font-headline-md text-headline-md font-extrabold text-primary">BS23-Blog Admin</div>
+            <div class="flex items-center gap-md">
+                <div class="flex items-center gap-base">
+                    <button onclick="App.logout()" class="flex items-center gap-xs px-base py-xs bg-surface-container-high hover:bg-surface-container-highest text-on-surface rounded-lg font-label-md transition-all active:scale-95">
+                        <span class="material-symbols-outlined text-[18px]">logout</span>
+                        Logout
+                    </button>
+                </div>
+            </div>
+        </header>
+        <!-- Dashboard Content -->
+        <div class="p-lg space-y-lg">
+            <!-- Global Stats Section -->
+            <section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-gutter">
+                <!-- Total Users -->
+                <div class="bg-surface-container-lowest p-md rounded-xl border border-outline-variant shadow-sm hover:shadow-md transition-shadow">
+                    <div class="flex justify-between items-start mb-sm">
+                        <span class="material-symbols-outlined bg-primary-container text-on-primary-container p-2 rounded-lg" data-icon="person">person</span>
+                        <span class="text-primary font-label-sm">Active</span>
+                    </div>
+                    <p class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Total Users</p>
+                    <h3 id="stat-total-users" class="font-headline-lg text-headline-lg mt-xs text-on-background">0</h3>
+                </div>
+                <!-- Total Blog Posts -->
+                <div class="bg-surface-container-lowest p-md rounded-xl border border-outline-variant shadow-sm hover:shadow-md transition-shadow">
+                    <div class="flex justify-between items-start mb-sm">
+                        <span class="material-symbols-outlined bg-secondary-container text-on-secondary-container p-2 rounded-lg" data-icon="article">article</span>
+                        <span class="text-primary font-label-sm">Published</span>
+                    </div>
+                    <p class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Blog Posts</p>
+                    <h3 id="stat-total-blogs" class="font-headline-lg text-headline-lg mt-xs text-on-background">0</h3>
+                </div>
+                <!-- Active Categories -->
+                <div class="bg-surface-container-lowest p-md rounded-xl border border-outline-variant shadow-sm hover:shadow-md transition-shadow">
+                    <div class="flex justify-between items-start mb-sm">
+                        <span class="material-symbols-outlined bg-tertiary-container text-on-tertiary-container p-2 rounded-lg" data-icon="category">category</span>
+                        <span class="text-on-surface-variant font-label-sm">Steady</span>
+                    </div>
+                    <p class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Categories</p>
+                    <h3 id="stat-total-categories" class="font-headline-lg text-headline-lg mt-xs text-on-background">0</h3>
+                </div>
+                <!-- Total Comments -->
+                <div class="bg-surface-container-lowest p-md rounded-xl border border-outline-variant shadow-sm hover:shadow-md transition-shadow">
+                    <div class="flex justify-between items-start mb-sm">
+                        <span class="material-symbols-outlined bg-error-container text-on-error-container p-2 rounded-lg" data-icon="chat_bubble">chat_bubble</span>
+                        <span class="text-primary font-label-sm">Discussion</span>
+                    </div>
+                    <p class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Comments</p>
+                    <h3 id="stat-total-comments" class="font-headline-lg text-headline-lg mt-xs text-on-background">0</h3>
+                </div>
+            </section>
+            <!-- Management Tables: Tabbed Interface -->
+            <section class="bg-surface-container-lowest rounded-xl border border-outline-variant overflow-hidden shadow-sm">
+                <div class="border-b border-outline-variant bg-surface-container-low px-md pt-sm">
+                    <div class="flex gap-lg">
+                        <button class="font-label-md text-label-md pb-3 text-primary border-b-2 border-primary transition-all" id="tab-users" onclick="switchTab('users')">Users Management</button>
+                        <button class="font-label-md text-label-md pb-3 text-on-surface-variant border-b-2 border-transparent hover:text-primary transition-all" id="tab-comments" onclick="switchTab('comments')">Comments Moderation</button>
+                    </div>
+                </div>
+                <!-- Users Table Content -->
+                <div class="block" id="content-users">
+                    <div class="p-md flex justify-between items-center">
+                        <h2 class="font-headline-sm text-headline-sm text-on-surface">Registered Users</h2>
+                    </div>
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-left border-collapse">
+                            <thead class="bg-surface-container-low text-on-surface-variant font-label-sm text-label-sm">
+                                <tr>
+                                    <th class="p-md font-semibold uppercase">Name</th>
+                                    <th class="p-md font-semibold uppercase">Email</th>
+                                    <th class="p-md font-semibold uppercase">Role</th>
+                                    <th class="p-md font-semibold uppercase">Created At</th>
+                                    <th class="p-md font-semibold uppercase">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="users-tbody" class="text-body-md font-body-md">
+                                <!-- Users dynamic list -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <!-- Comments Table Content (Hidden by default) -->
+                <div class="hidden" id="content-comments">
+                    <div class="p-md flex justify-between items-center">
+                        <h2 class="font-headline-sm text-headline-sm text-on-surface">Recent Comments</h2>
+                    </div>
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-left border-collapse">
+                            <thead class="bg-surface-container-low text-on-surface-variant font-label-sm text-label-sm">
+                                <tr>
+                                    <th class="p-md font-semibold uppercase">Author</th>
+                                    <th class="p-md font-semibold uppercase">Content</th>
+                                    <th class="p-md font-semibold uppercase">Post</th>
+                                    <th class="p-md font-semibold uppercase">Date</th>
+                                    <th class="p-md font-semibold uppercase">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="comments-tbody" class="text-body-md font-body-md">
+                                <!-- Comments dynamic list -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+            <!-- Bottom Section: AI Assistant and Activity -->
+
+        </div>
+        <!-- Footer (Internal Dashboard Style) -->
+        <footer class="mt-lg border-t border-outline-variant px-md py-md flex flex-col md:flex-row justify-between items-center text-on-surface-variant">
+            <p class="font-label-sm text-label-sm">© 2024 Blog Inc. All rights reserved.</p>
+            <div class="flex gap-md mt-base md:mt-0">
+                <a class="font-label-sm text-label-sm hover:text-primary transition-colors" href="#">Privacy Policy</a>
+                <a class="font-label-sm text-label-sm hover:text-primary transition-colors" href="#">Terms</a>
+                <a class="font-label-sm text-label-sm hover:text-primary transition-colors" href="#">Contact Support</a>
+            </div>
+        </footer>
+    </main>
+    <!-- Floating Action Button (FAB) -->
+    <button class="fixed bottom-gutter right-gutter w-14 h-14 bg-primary text-on-primary rounded-full shadow-lg flex items-center justify-center hover:scale-110 active:scale-95 transition-all z-50">
+        <span class="material-symbols-outlined" data-icon="add">add</span>
+    </button>
+    <script>
+        const currentUser = App.getCurrentUser();
+        if (!currentUser) {
+            window.location.href = '/Pages/login.html';
+        } else if (currentUser.role !== 'Admin') {
+            alert('Access Denied: Admin role required.');
+            window.location.href = '/Pages/dashboard.html';
+        }
+
+        function switchTab(tab) {
+            const usersTab = document.getElementById('tab-users');
+            const commentsTab = document.getElementById('tab-comments');
+            const usersContent = document.getElementById('content-users');
+            const commentsContent = document.getElementById('content-comments');
+
+            if (tab === 'users') {
+                usersTab.classList.add('text-primary', 'border-primary');
+                usersTab.classList.remove('text-on-surface-variant', 'border-transparent');
+                commentsTab.classList.remove('text-primary', 'border-primary');
+                commentsTab.classList.add('text-on-surface-variant', 'border-transparent');
+                usersContent.classList.remove('hidden');
+                commentsContent.classList.add('hidden');
+                loadUsers();
+            } else {
+                commentsTab.classList.add('text-primary', 'border-primary');
+                commentsTab.classList.remove('text-on-surface-variant', 'border-transparent');
+                usersTab.classList.remove('text-primary', 'border-primary');
+                usersTab.classList.add('text-on-surface-variant', 'border-transparent');
+                commentsContent.classList.remove('hidden');
+                usersContent.classList.add('hidden');
+                loadComments();
+            }
+        }
+
+        function loadStats() {
+            App.ajax({
+                url: '/api/admin/stats',
+                method: 'GET',
+                success: function(response) {
+                    if (response.success && response.data) {
+                        const stats = response.data;
+                        $('#stat-total-users').text(stats.totalUsers);
+                        $('#stat-total-blogs').text(stats.totalBlogs);
+                        $('#stat-total-categories').text(stats.totalCategories);
+                        $('#stat-total-comments').text(stats.totalComments);
+                    }
+                }
+            });
+        }
+
+        function loadUsers() {
+            App.ajax({
+                url: '/api/admin/users',
+                method: 'GET',
+                success: function(response) {
+                    if (response.success && response.data) {
+                        const tbody = $('#users-tbody');
+                        tbody.empty();
+                        response.data.forEach(user => {
+                            const formattedDate = new Date(user.createdAt || Date.now()).toLocaleDateString('en-US', {
+                                month: 'short',
+                                day: 'numeric',
+                                year: 'numeric'
+                            });
+                            
+                            const isSelf = user.id === currentUser.id;
+                            const deleteBtn = isSelf 
+                                ? `<span class="material-symbols-outlined text-outline-variant cursor-not-allowed opacity-50" title="Cannot delete yourself">delete</span>`
+                                : `<button onclick="deleteUser('${user.id}')" class="p-xs text-on-surface-variant hover:text-error transition-colors" title="Delete User">
+                                       <span class="material-symbols-outlined">delete</span>
+                                   </button>`;
+
+                            const initials = user.username ? user.username.substring(0, 2).toUpperCase() : 'US';
+
+                            tbody.append(`
+                                <tr class="border-b border-outline-variant hover:bg-surface-container-low transition-colors">
+                                    <td class="p-md flex items-center gap-sm">
+                                        <div class="w-8 h-8 rounded-full bg-secondary-container text-on-secondary-container flex items-center justify-center font-bold text-xs">${initials}</div>
+                                        ${App.escapeHtml(user.username)}
+                                    </td>
+                                    <td class="p-md text-on-surface-variant">${App.escapeHtml(user.email)}</td>
+                                    <td class="p-md">
+                                        <span class="bg-primary-container text-on-primary-container px-2 py-0.5 rounded-full text-xs font-bold">${user.role}</span>
+                                    </td>
+                                    <td class="p-md text-on-surface-variant">${formattedDate}</td>
+                                    <td class="p-md">
+                                        <div class="flex gap-base">
+                                            ${deleteBtn}
+                                        </div>
+                                    </td>
+                                </tr>
+                            `);
+                        });
+                    }
+                }
+            });
+        }
+
+        function deleteUser(id) {
+            if (confirm('Are you sure you want to delete this user? This will remove all their associated blogs and comments.')) {
+                App.ajax({
+                    url: `/api/admin/users/${id}`,
+                    method: 'DELETE',
+                    success: function() {
+                        alert('User deleted successfully.');
+                        loadUsers();
+                        loadStats();
+                    },
+                    error: function(xhr) {
+                        alert(xhr.responseJSON?.message || 'Failed to delete user.');
+                    }
+                });
+            }
+        }
+
+        function loadComments() {
+            App.ajax({
+                url: '/api/admin/comments',
+                method: 'GET',
+                success: function(response) {
+                    if (response.success && response.data) {
+                        const tbody = $('#comments-tbody');
+                        tbody.empty();
+                        response.data.forEach(comment => {
+                            const formattedDate = new Date(comment.createdAt || Date.now()).toLocaleDateString('en-US', {
+                                month: 'short',
+                                day: 'numeric',
+                                year: 'numeric'
+                            });
+
+                            tbody.append(`
+                                <tr class="border-b border-outline-variant hover:bg-surface-container-low transition-colors">
+                                    <td class="p-md font-bold">${App.escapeHtml(comment.userName)}</td>
+                                    <td class="p-md text-on-surface-variant italic max-w-xs truncate" title="${App.escapeHtml(comment.content)}">"${App.escapeHtml(comment.content)}"</td>
+                                    <td class="p-md text-secondary underline">
+                                        <a href="/Pages/blog-detail.html?id=${comment.blogId}" target="_blank">${App.escapeHtml(comment.blogTitle)}</a>
+                                    </td>
+                                    <td class="p-md text-on-surface-variant text-sm whitespace-nowrap">${formattedDate}</td>
+                                    <td class="p-md">
+                                        <button onclick="deleteComment(${comment.id})" class="p-xs text-on-surface-variant hover:text-error transition-colors" title="Delete Comment">
+                                            <span class="material-symbols-outlined">delete</span>
+                                        </button>
+                                    </td>
+                                </tr>
+                            `);
+                        });
+                    }
+                }
+            });
+        }
+
+        function deleteComment(id) {
+            if (confirm('Are you sure you want to delete this comment?')) {
+                App.ajax({
+                    url: `/api/admin/comments/${id}`,
+                    method: 'DELETE',
+                    success: function() {
+                        alert('Comment deleted successfully.');
+                        loadComments();
+                        loadStats();
+                    },
+                    error: function(xhr) {
+                        alert(xhr.responseJSON?.message || 'Failed to delete comment.');
+                    }
+                });
+            }
+        }
+
+        $(document).ready(function() {
+            // Populate profile
+            if (currentUser) {
+                const displayName = currentUser.firstName && currentUser.lastName 
+                    ? `${currentUser.firstName} ${currentUser.lastName}`
+                    : (currentUser.username || currentUser.email || 'Admin');
+                const initial = (currentUser.firstName ? currentUser.firstName[0] : (currentUser.username ? currentUser.username[0] : 'A')).toUpperCase();
+
+                $('#user-display-name').text(displayName);
+                $('#user-display-role').text(currentUser.role || 'Admin');
+                $('#user-avatar-initial').text(initial);
+            }
+
+            loadStats();
+            loadUsers();
+        });
+    </script>
+</body>
+</html>

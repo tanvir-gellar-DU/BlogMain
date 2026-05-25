@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>BS23-Blog - Insights for Creators</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script src="/jquery/jquery.min.js"></script>
+    <script src="/js/app.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "error": "#ba1a1a",
+                        "surface-container-low": "#f2f4f6",
+                        "on-primary-fixed-variant": "#343d96",
+                        "on-tertiary-fixed": "#390c00",
+                        "surface-container-lowest": "#ffffff",
+                        "inverse-on-surface": "#eff1f3",
+                        "surface-bright": "#f7f9fb",
+                        "inverse-primary": "#bdc2ff",
+                        "on-primary": "#ffffff",
+                        "on-secondary": "#ffffff",
+                        "error-container": "#ffdad6",
+                        "background": "#f7f9fb",
+                        "on-primary-container": "#8690ee",
+                        "on-error-container": "#93000a",
+                        "on-tertiary-fixed-variant": "#7b2e12",
+                        "primary-fixed": "#e0e0ff",
+                        "tertiary-fixed": "#ffdbd0",
+                        "on-tertiary": "#ffffff",
+                        "on-surface": "#191c1e",
+                        "on-primary-fixed": "#000767",
+                        "on-tertiary-container": "#e17c5a",
+                        "surface-container-highest": "#e0e3e5",
+                        "on-error": "#ffffff",
+                        "tertiary": "#380b00",
+                        "surface-container": "#eceef0",
+                        "tertiary-container": "#5c1800",
+                        "on-secondary-fixed-variant": "#3a485b",
+                        "secondary-container": "#d5e3fc",
+                        "secondary-fixed-dim": "#b9c7df",
+                        "on-surface-variant": "#454652",
+                        "primary-container": "#1a237e",
+                        "surface-tint": "#4c56af",
+                        "surface": "#f7f9fb",
+                        "secondary": "#515f74",
+                        "on-secondary-fixed": "#0d1c2e",
+                        "surface-variant": "#e0e3e5",
+                        "inverse-surface": "#2d3133",
+                        "primary-fixed-dim": "#bdc2ff",
+                        "outline-variant": "#c6c5d4",
+                        "secondary-fixed": "#d5e3fc",
+                        "surface-container-high": "#e6e8ea",
+                        "primary": "#000666",
+                        "on-secondary-container": "#57657a",
+                        "surface-dim": "#d8dadc",
+                        "on-background": "#191c1e",
+                        "outline": "#767683",
+                        "tertiary-fixed-dim": "#ffb59d"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "md": "16px",
+                        "margin-desktop": "48px",
+                        "gutter": "24px",
+                        "xs": "4px",
+                        "margin-mobile": "16px",
+                        "base": "4px",
+                        "lg": "24px",
+                        "xl": "32px",
+                        "sm": "8px",
+                        "container-max": "1280px"
+                    },
+                    "fontFamily": {
+                        "body-md": ["Inter"],
+                        "body-sm": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "headline-xl-mobile": ["Inter"],
+                        "headline-lg": ["Inter"],
+                        "headline-xl": ["Inter"],
+                        "label-sm": ["Inter"],
+                        "headline-sm": ["Inter"],
+                        "headline-md": ["Inter"],
+                        "label-md": ["Inter"],
+                        "display": ["Inter"]
+                    },
+                    "fontSize": {
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "body-sm": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+                        "headline-xl-mobile": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "headline-lg": ["30px", { "lineHeight": "38px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+                        "headline-xl": ["40px", { "lineHeight": "48px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "label-sm": ["12px", { "lineHeight": "14px", "letterSpacing": "0.02em", "fontWeight": "500" }],
+                        "headline-sm": ["20px", { "lineHeight": "28px", "fontWeight": "600" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "label-md": ["14px", { "lineHeight": "16px", "letterSpacing": "0.01em", "fontWeight": "500" }],
+                        "display": ["40px", { "lineHeight": "48px", "letterSpacing": "-0.02em", "fontWeight": "700" }]
+                    }
+                },
+            },
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f7f9fb;
+        }
+
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .hero-gradient {
+            background: radial-gradient(circle at top right, #e0e0ff44, transparent), radial-gradient(circle at bottom left, #d5e3fc44, transparent);
+        }
+    </style>
+</head>
+
+<body class="text-on-background">
+    <!-- TopAppBar -->
+    <header
+        class="bg-surface dark:bg-background docked full-width top-0 z-50 border-b border-outline-variant dark:border-outline shadow-sm sticky">
+        <div class="flex justify-between items-center w-full px-md h-16 max-w-container-max mx-auto">
+            <div class="flex items-center gap-md">
+                <span class="font-display text-headline-lg font-extrabold text-primary">BS23-Blog</span>
+                <nav class="hidden md:flex items-center gap-md ml-lg">
+                    <a class="text-primary font-bold border-b-2 border-primary pb-1 font-label-md text-label-md transition-colors duration-200"
+                        href="/index.html">Home</a>
+                </nav>
+            </div>
+            <div class="flex items-center gap-sm">
+
+                <div id="auth-buttons-container" class="flex gap-sm items-center">
+                </div>
+            </div>
+        </div>
+    </header>
+    <main class="min-h-screen">
+        <!-- Hero Section -->
+        <section class="hero-gradient pt-xl pb-lg px-md">
+            <div class="max-w-[720px] mx-auto text-center">
+                <h1 class="font-display text-display text-on-surface mb-md">Insights for the modern creator.</h1>
+                <p class="font-body-lg text-body-lg text-on-surface-variant mb-lg">Discover deep dives into technology,
+                    design philosophy, and the future of digital writing.</p>
+                <div class="flex flex-col sm:flex-row gap-base justify-center">
+                    <div class="relative flex-grow max-w-md">
+                        <span
+                            class="material-symbols-outlined absolute left-sm top-1/2 -translate-y-1/2 text-outline">filter_list</span>
+                        <input id="search-input-hero"
+                            class="w-full pl-lg pr-md py-md rounded-xl border-outline-variant bg-surface-container-lowest focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all shadow-sm"
+                            placeholder="Filter by keyword..." type="text" />
+                    </div>
+                    <button id="search-btn-hero"
+                        class="bg-secondary text-on-secondary px-lg py-md rounded-xl font-headline-sm flex items-center justify-center gap-base hover:shadow-lg transition-all active:scale-95">
+                        <span>Find Articles</span>
+                    </button>
+                </div>
+            </div>
+        </section>
+        <!-- Main Feed Grid -->
+        <div class="max-w-container-max mx-auto px-md pb-xl">
+            <div class="flex flex-col lg:flex-row gap-gutter">
+                <!-- Blog Grid -->
+                <div class="lg:w-3/4">
+                    <div id="blog-grid" class="grid grid-cols-1 md:grid-cols-2 gap-gutter">
+                        <!-- Dynamic items -->
+                    </div>
+                    <!-- Pagination -->
+                    <div id="pagination-container" class="mt-lg flex justify-center gap-base">
+                        <!-- Dynamic buttons -->
+                    </div>
+                </div>
+                <!-- Sidebar -->
+                <aside class="lg:w-1/4 space-y-lg">
+                    <!-- AI Assistant Promo -->
+                    <div
+                        class="p-md rounded-xl bg-primary-fixed-dim text-on-primary-fixed border-2 border-primary shadow-lg">
+                        <div class="flex items-center gap-sm mb-sm">
+                            <span class="material-symbols-outlined">auto_awesome</span>
+                            <span class="font-headline-sm text-headline-sm">AI BS23-Blog Assistant</span>
+                        </div>
+                        <p class="font-label-md text-label-md mb-md">Need a summary of today's trending topics? Let our
+                            assistant draft a digest for you.</p>
+                        <button
+                            class="w-full bg-primary text-on-primary py-base rounded-lg font-bold hover:bg-primary-container transition-all">Try
+                            Assistant</button>
+                    </div>
+                    <!-- Popular Categories -->
+                    <div>
+                        <h4 class="font-headline-sm text-headline-sm text-on-surface mb-md">Popular Categories</h4>
+                        <div id="categories-list" class="flex flex-wrap gap-sm">
+                            <!-- Dynamic Categories -->
+                        </div>
+                    </div>
+                    <!-- Trending Posts -->
+
+                    <!-- Newsletter -->
+
+                </aside>
+            </div>
+        </div>
+    </main>
+    <!-- Footer -->
+    <footer class="bg-surface-container-lowest border-t border-outline-variant">
+        <div
+            class="flex flex-col md:flex-row justify-between items-center px-md py-lg max-w-container-max mx-auto w-full">
+            <div class="mb-md md:mb-0">
+                <span class="font-display text-headline-md text-on-surface">BS23-Blog</span>
+                <p class="font-label-sm text-label-sm text-on-surface-variant mt-xs">Empowering voices through elegant
+                    design.</p>
+            </div>
+            <div class="flex flex-col md:flex-row items-center gap-lg">
+                <nav class="flex gap-md">
+                    <a class="text-on-surface-variant hover:text-primary transition-colors font-label-sm text-label-sm underline-offset-4 hover:underline"
+                        href="#">Privacy Policy</a>
+                    <a class="text-on-surface-variant hover:text-primary transition-colors font-label-sm text-label-sm underline-offset-4 hover:underline"
+                        href="#">Terms</a>
+                    <a class="text-on-surface-variant hover:text-primary transition-colors font-label-sm text-label-sm underline-offset-4 hover:underline"
+                        href="#">Careers</a>
+                    <a class="text-on-surface-variant hover:text-primary transition-colors font-label-sm text-label-sm underline-offset-4 hover:underline"
+                        href="#">Contact</a>
+                </nav>
+                <span class="text-on-surface-variant font-label-sm text-label-sm">© 2024 BS23-Blog Inc. All rights
+                    reserved.</span>
+            </div>
+        </div>
+    </footer>
+    <!-- AI Assistant Floating Chat -->
+    <div id="ai-chat-bubble"
+        class="fixed bottom-lg right-lg z-[9998] cursor-pointer bg-primary text-on-primary w-14 h-14 rounded-full flex items-center justify-center shadow-lg hover:scale-110 hover:shadow-xl transition-all">
+        <span class="material-symbols-outlined text-[28px]">auto_awesome</span>
+    </div>
+
+    <div id="ai-chat-drawer"
+        class="hidden fixed bottom-20 right-lg z-[9998] w-96 h-[500px] bg-surface-container-lowest border border-outline-variant rounded-2xl shadow-2xl flex flex-col overflow-hidden animate-in fade-in slide-in-from-bottom-8 duration-300">
+        <!-- Chat Header -->
+        <div class="bg-primary text-on-primary p-md flex items-center justify-between">
+            <div class="flex items-center gap-sm">
+                <span class="material-symbols-outlined">auto_awesome</span>
+                <span class="font-headline-sm text-label-md font-bold">AI BS23-Blog Assistant</span>
+            </div>
+            <button id="close-chat-btn" class="text-on-primary hover:opacity-80 transition-opacity flex items-center">
+                <span class="material-symbols-outlined">close</span>
+            </button>
+        </div>
+        <!-- Chat Messages -->
+        <div id="chat-messages" class="flex-grow p-md overflow-y-auto space-y-md flex flex-col">
+            <div
+                class="bg-surface-container-low text-on-surface-variant p-sm rounded-lg text-label-md max-w-[85%] self-start border border-outline-variant">
+                Hello! I can summarize blogs, suggest writing tips, or answer queries. Please log in to start chatting!
+            </div>
+        </div>
+        <!-- Chat Input -->
+        <form id="chat-form"
+            class="border-t border-outline-variant p-sm bg-surface-container-low flex gap-xs items-center">
+            <input id="chat-input" class="flex-grow bg-transparent border-none focus:ring-0 text-body-sm"
+                placeholder="Please login to chat..." type="text" disabled />
+            <button class="text-primary disabled:opacity-40" type="submit" disabled>
+                <span class="material-symbols-outlined">send</span>
+            </button>
+        </form>
+    </div>
+
+    <script>
+        let currentPage = 1;
+        const pageSize = 6;
+        let selectedCategoryId = null;
+        let searchQuery = "";
+        let chatHistory = [];
+
+        function loadBlogs(page = 1) {
+            currentPage = page;
+            let url = `/api/blog?page=${currentPage}&pageSize=${pageSize}`;
+
+            if (selectedCategoryId) {
+                url = `/api/blog/category/${selectedCategoryId}?page=${currentPage}&pageSize=${pageSize}`;
+            } else if (searchQuery) {
+                url = `/api/blog/search?query=${encodeURIComponent(searchQuery)}&page=${currentPage}&pageSize=${pageSize}`;
+            }
+
+            App.ajax({
+                url: url,
+                method: 'GET',
+                success: function (response) {
+                    let blogs = [];
+                    let total = 0;
+
+                    if (response.success && response.data) {
+                        if (Array.isArray(response.data)) {
+                            blogs = response.data;
+                            total = blogs.length;
+                        } else {
+                            blogs = response.data.blogs || [];
+                            total = response.data.total || 0;
+                        }
+                    }
+
+                    renderBlogs(blogs);
+                    renderPagination(total);
+                },
+                error: function () {
+                    $('#blog-grid').html('<p class="col-span-2 text-center text-on-surface-variant py-lg">Failed to load articles.</p>');
+                }
+            });
+        }
+
+        function renderBlogs(blogs) {
+            const grid = $('#blog-grid');
+            const currentUser = App.getCurrentUser();
+            const isAdmin = currentUser && currentUser.role === 'Admin';
+            grid.empty();
+
+            if (blogs.length === 0) {
+                grid.html('<p class="col-span-2 text-center text-on-surface-variant py-lg font-bold">No articles found matching your criteria.</p>');
+                return;
+            }
+
+            blogs.forEach((blog, index) => {
+                const cover = blog.coverImageUrl || 'https://images.unsplash.com/photo-1499750310107-5fef28a66643?w=800&auto=format&fit=crop&q=60';
+                const excerpt = blog.excerpt || (blog.content.substring(0, 120) + '...');
+                const date = new Date(blog.createdAt).toLocaleDateString(undefined, { month: 'short', day: 'numeric', year: 'numeric' });
+                const adminActions = isAdmin ? `
+                    <div class="flex items-center gap-xs">
+                       
+                        <button class="admin-delete-blog p-base rounded-full bg-surface-container hover:bg-error hover:text-white text-error transition-colors flex items-center justify-center w-8 h-8" data-id="${blog.id}" title="Delete article">
+                            <span class="material-symbols-outlined text-sm">delete</span>
+                        </button>
+                    </div>
+                ` : '';
+
+                let cardHtml = '';
+                if (index === 0 && !selectedCategoryId && !searchQuery) {
+                    // Featured Card (Span 2)
+                    cardHtml = `
+                        <article class="md:col-span-2 group relative bg-surface-container-lowest rounded-xl border border-outline-variant overflow-hidden hover:shadow-xl transition-all duration-300 transform hover:translate-y-[-4px]">
+                            <div class="flex flex-col md:flex-row h-full">
+                                <div class="md:w-1/2 overflow-hidden h-64 md:h-auto">
+                                    <img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" src="${cover}" alt="${blog.title}" />
+                                </div>
+                                <div class="md:w-1/2 p-lg flex flex-col justify-between">
+                                    <div>
+                                        <div class="flex items-center gap-sm mb-base">
+                                            <span class="bg-primary-container text-on-primary-container text-label-sm font-label-sm px-sm py-[2px] rounded-full capitalize">${blog.categoryName}</span>
+                                            <span class="text-on-surface-variant text-label-sm font-label-sm">${date}</span>
+                                        </div>
+                                        <h2 class="font-headline-lg text-headline-lg text-on-surface mb-sm group-hover:text-primary transition-colors">${blog.title}</h2>
+                                        <p class="font-body-md text-body-md text-on-surface-variant line-clamp-3">${excerpt}</p>
+                                    </div>
+                                    <div class="mt-lg flex items-center justify-between">
+                                        <span class="font-label-md text-label-md text-on-surface-variant">By <strong class="text-on-surface">${blog.authorName}</strong></span>
+                                        <div class="flex items-center gap-sm">
+                                            ${adminActions}
+                                            <a href="/Pages/blog-detail.html?id=${blog.id}" class="flex items-center gap-xs text-primary font-bold hover:gap-base transition-all">
+                                                <span class="font-label-md text-label-md">Read More</span>
+                                                <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </article>
+                    `;
+                } else {
+                    // Regular Card
+                    cardHtml = `
+                        <article class="bg-surface-container-lowest rounded-xl border border-outline-variant overflow-hidden group hover:shadow-md transition-all duration-300 transform hover:translate-y-[-4px]">
+                            <div class="h-48 overflow-hidden">
+                                <img class="w-full h-full object-cover transition-transform group-hover:scale-105" src="${cover}" alt="${blog.title}" />
+                            </div>
+                            <div class="p-md flex flex-col h-64 justify-between">
+                                <div>
+                                    <div class="flex items-center gap-sm mb-base">
+                                        <span class="text-secondary font-semibold font-label-sm text-label-sm bg-surface-container-low px-sm py-[2px] rounded-full capitalize">${blog.categoryName}</span>
+                                        <span class="text-on-surface-variant text-label-sm">${date}</span>
+                                    </div>
+                                    <h3 class="font-headline-sm text-headline-sm text-on-surface mb-xs line-clamp-2 group-hover:text-primary transition-colors">${blog.title}</h3>
+                                    <p class="font-body-md text-body-md text-on-surface-variant line-clamp-2">${excerpt}</p>
+                                </div>
+                                <div class="flex items-center justify-between mt-md">
+                                    <span class="font-label-md text-label-md text-on-surface-variant">By <strong class="text-on-surface">${blog.authorName}</strong></span>
+                                    <div class="flex items-center gap-xs">
+                                        ${adminActions}
+                                        <a href="/Pages/blog-detail.html?id=${blog.id}" class="p-base rounded-full bg-surface-container hover:bg-primary hover:text-white text-primary transition-colors flex items-center justify-center w-8 h-8">
+                                            <span class="material-symbols-outlined text-sm">north_east</span>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </article>
+                    `;
+                }
+                grid.append(cardHtml);
+            });
+
+            $('.admin-edit-blog').off('click').on('click', function (e) {
+                e.preventDefault();
+                e.stopPropagation();
+                window.location.href = `/Pages/editor.html?id=${$(this).data('id')}`;
+            });
+
+            $('.admin-delete-blog').off('click').on('click', function (e) {
+                e.preventDefault();
+                e.stopPropagation();
+                const blogId = $(this).data('id');
+                if (!confirm('Delete this article?')) return;
+
+                App.ajax({
+                    url: `/api/blog/${blogId}`,
+                    method: 'DELETE',
+                    success: function () {
+                        App.showToast('Article deleted successfully.');
+                        loadBlogs(currentPage);
+                    },
+                    error: function (xhr) {
+                        App.showToast(xhr.responseJSON?.message || 'Failed to delete article.', 'error');
+                    }
+                });
+            });
+        }
+
+        function renderPagination(total) {
+            const container = $('#pagination-container');
+            container.empty();
+
+            const totalPages = Math.ceil(total / pageSize);
+            if (totalPages <= 1) return;
+
+            // Prev Button
+            const prevDisabled = currentPage === 1 ? 'disabled opacity-50 cursor-not-allowed' : '';
+            container.append(`
+                <button class="w-10 h-10 flex items-center justify-center rounded-lg border border-outline-variant hover:bg-surface-container-high transition-colors page-prev" ${prevDisabled}>
+                    <span class="material-symbols-outlined">chevron_left</span>
+                </button>
+            `);
+
+            // Page numbers
+            for (let i = 1; i <= totalPages; i++) {
+                const activeClass = i === currentPage ? 'bg-primary text-on-primary font-bold' : 'border border-outline-variant hover:bg-surface-container-high';
+                container.append(`
+                    <button class="w-10 h-10 flex items-center justify-center rounded-lg font-label-md transition-colors page-number ${activeClass}" data-page="${i}">
+                        ${i}
+                    </button>
+                `);
+            }
+
+            // Next Button
+            const nextDisabled = currentPage === totalPages ? 'disabled opacity-50 cursor-not-allowed' : '';
+            container.append(`
+                <button class="w-10 h-10 flex items-center justify-center rounded-lg border border-outline-variant hover:bg-surface-container-high transition-colors page-next" ${nextDisabled}>
+                    <span class="material-symbols-outlined">chevron_right</span>
+                </button>
+            `);
+
+            $('.page-number').off('click').on('click', function () {
+                loadBlogs($(this).data('page'));
+            });
+
+            $('.page-prev').off('click').on('click', function () {
+                if (currentPage > 1) loadBlogs(currentPage - 1);
+            });
+
+            $('.page-next').off('click').on('click', function () {
+                if (currentPage < totalPages) loadBlogs(currentPage + 1);
+            });
+        }
+
+        function loadCategories() {
+            App.ajax({
+                url: '/api/category',
+                method: 'GET',
+                success: function (response) {
+                    if (response.success && response.data) {
+                        const list = $('#categories-list');
+                        list.empty();
+
+                        // All button
+                        const allActive = selectedCategoryId === null ? 'bg-primary text-on-primary' : 'bg-surface-container text-on-surface-variant hover:bg-secondary-container hover:text-on-secondary-container';
+                        list.append(`<button class="px-md py-base rounded-full font-label-md text-label-md transition-all category-filter ${allActive}" data-id="">All</button>`);
+
+                        response.data.forEach(cat => {
+                            const active = selectedCategoryId === cat.id ? 'bg-primary text-on-primary' : 'bg-surface-container text-on-surface-variant hover:bg-secondary-container hover:text-on-secondary-container';
+                            list.append(`
+                                <button class="px-md py-base rounded-full font-label-md text-label-md transition-all category-filter ${active}" data-id="${cat.id}">
+                                    ${cat.name}
+                                </button>
+                            `);
+                        });
+
+                        $('.category-filter').off('click').on('click', function () {
+                            const id = $(this).data('id');
+                            selectedCategoryId = id ? parseInt(id) : null;
+                            searchQuery = ""; // Clear search
+                            $('#search-input-header').val('');
+                            $('#search-input-hero').val('');
+
+                            // Re-render categories select styles
+                            $('.category-filter').removeClass('bg-primary text-on-primary').addClass('bg-surface-container text-on-surface-variant hover:bg-secondary-container hover:text-on-secondary-container');
+                            $(this).removeClass('bg-surface-container text-on-surface-variant hover:bg-secondary-container hover:text-on-secondary-container').addClass('bg-primary text-on-primary');
+
+                            loadBlogs(1);
+                        });
+                    }
+                }
+            });
+        }
+
+        // Setup Search
+        function triggerSearch(term) {
+            searchQuery = term;
+            selectedCategoryId = null;
+            $('.category-filter').removeClass('bg-primary text-on-primary').addClass('bg-surface-container text-on-surface-variant');
+            loadBlogs(1);
+        }
+
+        $('#search-input-header').on('keypress', function (e) {
+            if (e.which === 13) {
+                triggerSearch($(this).val());
+            }
+        });
+
+        $('#search-btn-hero').on('click', function () {
+            triggerSearch($('#search-input-hero').val());
+        });
+
+        $('#search-input-hero').on('keypress', function (e) {
+            if (e.which === 13) {
+                triggerSearch($(this).val());
+            }
+        });
+
+        // AI Chat Widget Logic
+        $('#ai-chat-bubble').on('click', function () {
+            $('#ai-chat-drawer').toggleClass('hidden');
+            if (!$('#ai-chat-drawer').hasClass('hidden')) {
+                scrollToBottom();
+            }
+        });
+
+        $('#close-chat-btn').on('click', function () {
+            $('#ai-chat-drawer').addClass('hidden');
+        });
+
+        function scrollToBottom() {
+            const msgs = $('#chat-messages');
+            if (msgs[0]) {
+                msgs.scrollTop(msgs[0].scrollHeight);
+            }
+        }
+
+        function checkChatAuth() {
+            if (App.isLoggedIn()) {
+                $('#chat-input').prop('disabled', false).attr('placeholder', 'Ask the AI Assistant...');
+                $('#chat-form button').prop('disabled', false);
+                $('#chat-messages').html(`
+                    <div class="bg-surface-container-low text-on-surface-variant p-sm rounded-lg text-label-md max-w-[85%] self-start border border-outline-variant shadow-sm">
+                        Welcome back! How can I assist you with your blogs or reading today?
+                    </div>
+                `);
+            } else {
+                $('#chat-input').prop('disabled', true).attr('placeholder', 'Please login to chat...');
+                $('#chat-form button').prop('disabled', true);
+            }
+        }
+
+        $('#chat-form').on('submit', function (e) {
+            e.preventDefault();
+            const message = $('#chat-input').val().trim();
+            if (!message) return;
+
+            // Append user message
+            $('#chat-messages').append(`
+                <div class="bg-primary text-on-primary p-sm rounded-lg text-label-md max-w-[85%] ml-auto text-right self-end shadow-sm">
+                    ${message}
+                </div>
+            `);
+            $('#chat-input').val('');
+            scrollToBottom();
+
+            // Loading indicator
+            const loadingId = 'loading-' + Date.now();
+            $('#chat-messages').append(`
+                <div id="${loadingId}" class="bg-surface-container-low text-on-surface-variant p-sm rounded-lg text-label-md max-w-[85%] self-start flex items-center gap-xs border border-outline-variant shadow-sm">
+                    <span class="material-symbols-outlined animate-spin text-sm">progress_activity</span> Thinking...
+                </div>
+            `);
+            scrollToBottom();
+
+            App.ajax({
+                url: '/api/ai/chat',
+                method: 'POST',
+                contentType: 'application/json',
+                data: JSON.stringify({
+                    message: message,
+                    history: chatHistory
+                }),
+                success: function (response) {
+                    $(`#${loadingId}`).remove();
+                    if (response.success && response.data) {
+                        $('#chat-messages').append(`
+                            <div class="bg-surface-container-low text-on-surface-variant p-sm rounded-lg text-label-md max-w-[85%] self-start border border-outline-variant shadow-sm">
+                                ${response.data}
+                            </div>
+                        `);
+                        chatHistory.push({ role: 'user', content: message, timestamp: new Date().toISOString() });
+                        chatHistory.push({ role: 'assistant', content: response.data, timestamp: new Date().toISOString() });
+                    } else {
+                        $('#chat-messages').append(`
+                            <div class="bg-red-50 text-red-800 p-sm rounded-lg text-label-md max-w-[85%] self-start border border-red-200">
+                                Sorry, I encountered an error.
+                            </div>
+                        `);
+                    }
+                    scrollToBottom();
+                },
+                error: function (xhr) {
+                    $(`#${loadingId}`).remove();
+                    const err = xhr.responseJSON ? xhr.responseJSON.message : 'Error reaching assistant.';
+                    $('#chat-messages').append(`
+                        <div class="bg-red-50 text-red-800 p-sm rounded-lg text-label-md max-w-[85%] self-start border border-red-200">
+                            ${err}
+                        </div>
+                    `);
+                    scrollToBottom();
+                }
+            });
+        });
+
+        // Initialize Page
+        $(document).ready(function () {
+            const catParam = App.getQueryParam('category');
+            if (catParam) {
+                selectedCategoryId = parseInt(catParam);
+            }
+            const qParam = App.getQueryParam('q');
+            if (qParam) {
+                searchQuery = qParam;
+                $('#search-input-header').val(qParam);
+                $('#search-input-hero').val(qParam);
+            }
+
+            loadBlogs(1);
+            loadCategories();
+            checkChatAuth();
+
+            // Connect Try Assistant promo button
+           $('button:contains("Try Assistant")').on('click', function () {
+                $('#ai-chat-drawer').removeClass('hidden');
+                scrollToBottom();
+            });
+        });
+    </script>
+</body>
+
+</html>

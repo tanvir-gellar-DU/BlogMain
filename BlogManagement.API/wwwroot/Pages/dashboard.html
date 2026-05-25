@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Author Dashboard | BS23-Blog</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script src="/jquery/jquery.min.js"></script>
+    <script src="/js/app.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet" />
+    <script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "error": "#ba1a1a",
+                    "surface-container-low": "#f2f4f6",
+                    "on-primary-fixed-variant": "#343d96",
+                    "on-tertiary-fixed": "#390c00",
+                    "surface-container-lowest": "#ffffff",
+                    "inverse-on-surface": "#eff1f3",
+                    "surface-bright": "#f7f9fb",
+                    "inverse-primary": "#bdc2ff",
+                    "on-primary": "#ffffff",
+                    "on-secondary": "#ffffff",
+                    "error-container": "#ffdad6",
+                    "background": "#f7f9fb",
+                    "on-primary-container": "#8690ee",
+                    "on-error-container": "#93000a",
+                    "on-tertiary-fixed-variant": "#7b2e12",
+                    "primary-fixed": "#e0e0ff",
+                    "tertiary-fixed": "#ffdbd0",
+                    "on-tertiary": "#ffffff",
+                    "on-surface": "#191c1e",
+                    "on-primary-fixed": "#000767",
+                    "on-tertiary-container": "#e17c5a",
+                    "surface-container-highest": "#e0e3e5",
+                    "on-error": "#ffffff",
+                    "tertiary": "#380b00",
+                    "surface-container": "#eceef0",
+                    "tertiary-container": "#5c1800",
+                    "on-secondary-fixed-variant": "#3a485b",
+                    "secondary-container": "#d5e3fc",
+                    "secondary-fixed-dim": "#b9c7df",
+                    "on-surface-variant": "#454652",
+                    "primary-container": "#1a237e",
+                    "surface-tint": "#4c56af",
+                    "surface": "#f7f9fb",
+                    "secondary": "#515f74",
+                    "on-secondary-fixed": "#0d1c2e",
+                    "surface-variant": "#e0e3e5",
+                    "inverse-surface": "#2d3133",
+                    "primary-fixed-dim": "#bdc2ff",
+                    "outline-variant": "#c6c5d4",
+                    "secondary-fixed": "#d5e3fc",
+                    "surface-container-high": "#e6e8ea",
+                    "primary": "#000666",
+                    "on-secondary-container": "#57657a",
+                    "surface-dim": "#d8dadc",
+                    "on-background": "#191c1e",
+                    "outline": "#767683",
+                    "tertiary-fixed-dim": "#ffb59d"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "md": "16px",
+                    "margin-desktop": "48px",
+                    "gutter": "24px",
+                    "xs": "4px",
+                    "margin-mobile": "16px",
+                    "base": "4px",
+                    "lg": "24px",
+                    "xl": "32px",
+                    "sm": "8px"
+            },
+            "fontFamily": {
+                    "body-md": ["Inter"],
+                    "body-sm": ["Inter"],
+                    "body-lg": ["Inter"],
+                    "headline-xl-mobile": ["Inter"],
+                    "headline-lg": ["Inter"],
+                    "headline-xl": ["Inter"],
+                    "label-sm": ["Inter"],
+                    "headline-sm": ["Inter"],
+                    "headline-md": ["Inter"],
+                    "label-md": ["Inter"]
+            },
+            "fontSize": {
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                    "headline-xl-mobile": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "headline-lg": ["30px", {"lineHeight": "38px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                    "headline-xl": ["40px", {"lineHeight": "48px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "label-sm": ["12px", {"lineHeight": "14px", "letterSpacing": "0.02em", "fontWeight": "500"}],
+                    "headline-sm": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                    "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                    "label-md": ["14px", {"lineHeight": "16px", "letterSpacing": "0.01em", "fontWeight": "500"}]
+            }
+          },
+        },
+      }
+    </script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(198, 197, 212, 0.8);
+        }
+    </style>
+</head>
+<body class="bg-surface-container-lowest text-on-surface">
+    <!-- Sidebar Navigation Shell -->
+    <aside class="h-screen w-64 fixed left-0 top-0 z-40 bg-surface-container-low dark:bg-surface-container border-r border-outline-variant dark:border-outline flex flex-col py-md space-y-base">
+        <div class="px-md mb-lg">
+            <h1 class="font-headline-sm text-headline-sm font-bold text-on-surface cursor-pointer" onclick="window.location.href='/index.html'">BS23-Blog</h1>
+            <p class="font-label-sm text-on-surface-variant">Author Portal</p>
+        </div>
+        <nav class="flex-grow flex flex-col gap-1">
+            <a class="flex items-center gap-base bg-secondary-container text-on-secondary-container rounded-lg p-base mx-sm font-bold active:scale-95 transition-all duration-200" href="/Pages/dashboard.html">
+                <span class="material-symbols-outlined" data-icon="article">article</span>
+                <span class="font-label-md">My Posts</span>
+            </a>
+            <a class="flex items-center gap-base text-on-surface-variant hover:bg-surface-container-highest rounded-lg p-base mx-sm active:scale-95 transition-all duration-200" href="/index.html">
+                <span class="material-symbols-outlined" data-icon="home">home</span>
+                <span class="font-label-md">Blog Home</span>
+            </a>
+            <div id="admin-nav-container"></div>
+        </nav>
+        <div class="px-sm pt-md mt-auto border-t border-outline-variant space-y-xs">
+            <div class="flex items-center gap-base p-base">
+                <div class="w-8 h-8 rounded-full bg-primary-container text-on-primary-container flex items-center justify-center font-bold text-xs uppercase" id="user-avatar-initial">U</div>
+                <div class="flex flex-col overflow-hidden">
+                    <span id="user-display-name" class="font-label-md font-bold truncate">Loading...</span>
+                    <span id="user-display-email" class="text-[10px] text-on-surface-variant truncate">...</span>
+                </div>
+            </div>
+           
+            <button onclick="App.logout()" class="w-full bg-outline-variant text-on-surface font-label-md py-base rounded-lg shadow-sm hover:bg-surface-container-high active:scale-95 transition-all">
+                Logout
+            </button>
+        </div>
+    </aside>
+    <!-- Main Content Canvas -->
+    <main class="ml-64 min-h-screen">
+        <!-- Header -->
+        <header class="sticky top-0 z-30 bg-surface/80 backdrop-blur-md px-lg py-md flex justify-between items-end">
+            <div>
+                <h2 id="welcome-title" class="font-headline-lg text-headline-lg text-on-surface">Welcome back!</h2>
+                <p class="font-body-md text-on-surface-variant">Here's what's happening with your stories today.</p>
+            </div>
+            <button onclick="window.location.href='/Pages/editor.html'" class="bg-primary px-md py-base rounded-lg text-on-primary font-label-md flex items-center gap-base hover:shadow-lg transition-all active:scale-95">
+                <span class="material-symbols-outlined" data-icon="add">add</span>
+                Create New Post
+            </button>
+        </header>
+        <div class="px-lg pb-lg space-y-lg">
+            <!-- Stat Cards Bento Grid -->
+            <section class="grid grid-cols-1 md:grid-cols-3 gap-gutter">
+                <div class="glass-card p-md rounded-xl flex flex-col justify-between shadow-sm">
+                    <div class="flex justify-between items-start">
+                        <span class="font-label-sm text-on-surface-variant tracking-wider uppercase">Total Posts</span>
+                        <span class="p-xs bg-primary-container text-on-primary-container rounded">
+                            <span class="material-symbols-outlined" data-icon="library_books">library_books</span>
+                        </span>
+                    </div>
+                    <div class="mt-base">
+                        <span id="stat-total-posts" class="font-headline-lg text-headline-lg">0</span>
+                        <div class="flex items-center gap-xs text-primary font-label-sm mt-1">
+                            <span>Stories written</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="glass-card p-md rounded-xl flex flex-col justify-between shadow-sm">
+                    <div class="flex justify-between items-start">
+                        <span class="font-label-sm text-on-surface-variant tracking-wider uppercase">Published</span>
+                        <span class="p-xs bg-secondary-container text-on-secondary-container rounded">
+                            <span class="material-symbols-outlined" data-icon="check_circle">check_circle</span>
+                        </span>
+                    </div>
+                    <div class="mt-base">
+                        <span id="stat-published-posts" class="font-headline-lg text-headline-lg">0</span>
+                        <div class="flex items-center gap-xs text-on-surface-variant font-label-sm mt-1">
+                            <span>Live on site</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="glass-card p-md rounded-xl flex flex-col justify-between shadow-sm">
+                    <div class="flex justify-between items-start">
+                        <span class="font-label-sm text-on-surface-variant tracking-wider uppercase">Drafts</span>
+                        <span class="p-xs bg-tertiary-container text-on-tertiary-container rounded">
+                            <span class="material-symbols-outlined" data-icon="edit_note">edit_note</span>
+                        </span>
+                    </div>
+                    <div class="mt-base">
+                        <span id="stat-drafts" class="font-headline-lg text-headline-lg">0</span>
+                        <div class="flex items-center gap-xs text-on-surface-variant font-label-sm mt-1">
+                            <span>Saved as draft</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- Main Content Area: Recent Posts -->
+            <section class="glass-card rounded-xl overflow-hidden shadow-sm">
+                <div class="px-md py-md border-b border-outline-variant flex justify-between items-center bg-surface-container-lowest">
+                    <h3 class="font-headline-sm text-headline-sm">Your Recent Posts</h3>
+                    <div class="flex gap-base">
+                        <div class="relative">
+                            <span class="absolute left-3 top-1/2 -translate-y-1/2 material-symbols-outlined text-outline text-[20px]" data-icon="search">search</span>
+                            <input id="dashboard-search" class="bg-surface-container-low border-none rounded-lg pl-10 py-xs font-label-md text-on-surface focus:ring-2 focus:ring-primary" placeholder="Search posts..." type="text" />
+                        </div>
+                    </div>
+                </div>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left border-collapse">
+                        <thead>
+                            <tr class="bg-surface-container-low">
+                                <th class="px-md py-base font-label-sm text-on-surface-variant uppercase tracking-wider">Title</th>
+                                <th class="px-md py-base font-label-sm text-on-surface-variant uppercase tracking-wider">Status</th>
+                                <th class="px-md py-base font-label-sm text-on-surface-variant uppercase tracking-wider">Date</th>
+                                <th class="px-md py-base font-label-sm text-on-surface-variant uppercase tracking-wider text-right">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="my-posts-tbody" class="divide-y divide-outline-variant">
+                            <!-- Dynamic my posts rows -->
+                        </tbody>
+                    </table>
+                </div>
+                <div class="px-md py-base bg-surface-container-low border-t border-outline-variant flex justify-between items-center">
+                    <span id="my-posts-showing-label" class="font-label-sm text-on-surface-variant">Showing 0 posts</span>
+                </div>
+            </section>
+        </div>
+        <!-- AI Assistant Floating Panel -->
+        <div class="fixed bottom-base right-base w-80 glass-card rounded-xl shadow-lg border-2 border-primary-container/20 overflow-hidden transform translate-y-[calc(100%-36px)] transition-transform duration-500" id="ai-panel">
+            <div class="bg-primary px-base py-xs flex justify-between items-center text-on-primary">
+                <div class="flex items-center gap-xs">
+                    <span class="material-symbols-outlined text-[18px]" data-icon="auto_awesome">auto_awesome</span>
+                    <span class="font-label-sm">AI Writing Buddy</span>
+                </div>
+                <button class="hover:bg-white/20 rounded p-xs" onclick="document.getElementById('ai-panel').classList.toggle('translate-y-[calc(100%-36px)]')">
+                    <span class="material-symbols-outlined text-[16px]" data-icon="keyboard_arrow_down">keyboard_arrow_down</span>
+                </button>
+            </div>
+            <div class="p-base space-y-base bg-surface-container-lowest">
+                <div class="bg-surface-container-low p-base rounded-lg border border-primary-container/10">
+                    <p class="font-label-sm text-on-surface italic">"Need ideas or need to draft something? Ask me anything!"</p>
+                </div>
+                <div class="flex flex-col gap-xs max-h-40 overflow-y-auto p-xs space-y-xs" id="ai-buddy-chat-history"></div>
+                <div class="flex gap-xs mt-base">
+                    <input id="ai-buddy-input" type="text" class="flex-grow p-xs border border-outline-variant rounded-lg text-body-sm focus:ring-1 focus:ring-primary focus:outline-none" placeholder="Ask AI..." />
+                    <button id="ai-buddy-send-btn" class="bg-primary text-on-primary font-bold text-label-sm px-sm py-xs rounded hover:opacity-90 transition-all">Send</button>
+                </div>
+            </div>
+        </div>
+    </main>
+    <!-- Footer Shell -->
+    <footer class="ml-64 border-t border-outline-variant bg-surface-container-lowest dark:bg-surface-container-low">
+        <div class="flex flex-col md:flex-row justify-between items-center px-md py-lg max-w-7xl mx-auto">
+            <div class="flex flex-col mb-base md:mb-0">
+                <span class="font-headline-md text-headline-md text-on-surface">BS23-Blog</span>
+                <span class="font-label-sm text-on-surface-variant">© 2024 BS23-Blog Inc. All rights reserved.</span>
+            </div>
+            <div class="flex gap-md">
+                <a class="font-label-sm text-on-surface-variant hover:text-primary transition-colors underline-offset-4 hover:underline" href="#">Privacy Policy</a>
+                <a class="font-label-sm text-on-surface-variant hover:text-primary transition-colors underline-offset-4 hover:underline" href="#">Terms</a>
+                <a class="font-label-sm text-on-surface-variant hover:text-primary transition-colors underline-offset-4 hover:underline" href="#">Careers</a>
+                <a class="font-label-sm text-on-surface-variant hover:text-primary transition-colors underline-offset-4 hover:underline" href="#">Contact</a>
+            </div>
+        </div>
+    </footer>
+    <script>
+        if (!App.isLoggedIn()) {
+            window.location.href = '/Pages/login.html';
+        }
+
+        let allMyBlogs = [];
+
+        function loadMyBlogs() {
+            App.ajax({
+                url: '/api/blog/my',
+                method: 'GET',
+                success: function(response) {
+                    if (response.success && response.data) {
+                        allMyBlogs = Array.isArray(response.data) ? response.data : [response.data];
+
+                        // Sort by Id descending
+                        allMyBlogs.sort((a, b) => b.id - a.id);
+
+                        updateStats();
+                        renderBlogs(allMyBlogs);
+                    } else {
+                        console.error('API response error:', response);
+                    }
+                },
+                error: function(xhr) {
+                    console.error('Failed to load blogs:', xhr);
+                    alert('Failed to load blogs. Please refresh the page.');
+                }
+            });
+        }
+
+        function updateStats() {
+            const total = allMyBlogs.length;
+            const published = allMyBlogs.filter(b => b.status === 'Published').length;
+            const drafts = allMyBlogs.filter(b => b.status === 'Draft').length;
+
+            $('#stat-total-posts').text(total);
+            $('#stat-published-posts').text(published);
+            $('#stat-drafts').text(drafts);
+        }
+
+        function renderBlogs(blogs) {
+            const tbody = $('#my-posts-tbody');
+            tbody.empty();
+            $('#my-posts-showing-label').text(`Showing ${blogs.length} of ${allMyBlogs.length} posts`);
+            
+            if (blogs.length === 0) {
+                tbody.append(`
+                    <tr>
+                        <td colspan="4" class="px-md py-lg text-center text-on-surface-variant italic">
+                            No posts found. Start writing by clicking "New Post"!
+                        </td>
+                    </tr>
+                `);
+                return;
+            }
+
+            blogs.forEach(blog => {
+                const formattedDate = new Date(blog.createdAt || Date.now()).toLocaleDateString('en-US', {
+                    month: 'short',
+                    day: 'numeric',
+                    year: 'numeric'
+                });
+                
+                const wordCount = blog.content ? blog.content.split(/\s+/).length : 0;
+                const readTime = Math.max(1, Math.ceil(wordCount / 200));
+                const statusClass = blog.status === 'Published' 
+                    ? 'bg-primary-container text-on-primary-container' 
+                    : 'bg-surface-container-highest text-on-surface-variant';
+
+                tbody.append(`
+                    <tr class="hover:bg-surface-container-high transition-colors cursor-pointer group" onclick="if (!$(event.target).closest('button').length) window.location.href='/Pages/blog-detail.html?id=${blog.id}'">
+                        <td class="px-md py-md">
+                            <div class="flex items-center gap-base">
+                                <div class="w-10 h-10 rounded bg-surface-container-highest overflow-hidden shrink-0">
+                                    <img alt="Post thumbnail" class="w-full h-full object-cover" src="${blog.coverImageUrl || 'https://images.unsplash.com/photo-1499750310107-5fef28a66643?w=100'}" />
+                                </div>
+                                <div>
+                                    <p class="font-body-md font-bold text-on-surface group-hover:text-primary transition-all duration-200">${App.escapeHtml(blog.title)}</p>
+                                    <p class="font-label-sm text-on-surface-variant">${App.escapeHtml(blog.categoryName || 'General')} · ${readTime} min read</p>
+                                </div>
+                            </div>
+                        </td>
+                        <td class="px-md py-md">
+                            <span class="px-base py-xs rounded-full font-label-sm ${statusClass}">${blog.status || 'Draft'}</span>
+                        </td>
+                        <td class="px-md py-md font-label-md text-on-surface-variant">${formattedDate}</td>
+                        <td class="px-md py-md text-right">
+                            <div class="flex justify-end gap-base opacity-0 group-hover:opacity-100 transition-opacity">
+                                <button onclick="window.location.href='/Pages/editor.html?id=${blog.id}'" class="p-xs text-on-surface-variant hover:text-primary transition-colors" title="Edit">
+                                    <span class="material-symbols-outlined">edit</span>
+                                </button>
+                                <button onclick="deleteBlog(${blog.id})" class="p-xs text-on-surface-variant hover:text-error transition-colors" title="Delete">
+                                    <span class="material-symbols-outlined">delete</span>
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                `);
+            });
+        }
+
+        function deleteBlog(id) {
+            if (confirm('Are you sure you want to delete this blog post? This action cannot be undone.')) {
+                App.ajax({
+                    url: `/api/blog/${id}`,
+                    method: 'DELETE',
+                    success: function() {
+                        alert('Blog deleted successfully.');
+                        loadMyBlogs();
+                    },
+                    error: function(xhr) {
+                        alert(xhr.responseJSON?.message || 'Error deleting blog post.');
+                    }
+                });
+            }
+        }
+
+        // Live Search Filter
+        $('#dashboard-search').on('input', function() {
+            const query = $(this).val().toLowerCase();
+            const filtered = allMyBlogs.filter(b => 
+                b.title.toLowerCase().includes(query) || 
+                (b.categoryName && b.categoryName.toLowerCase().includes(query))
+            );
+            renderBlogs(filtered);
+        });
+
+        // AI Writing Buddy Send Action
+        function sendAiMessage() {
+            const val = $('#ai-buddy-input').val().trim();
+            if (!val) return;
+
+            const chatHistory = $('#ai-buddy-chat-history');
+            chatHistory.append(`<div class="text-right text-xs bg-primary text-on-primary p-xs rounded-lg max-w-[90%] ml-auto mb-xs">${App.escapeHtml(val)}</div>`);
+            $('#ai-buddy-input').val('');
+
+            chatHistory.scrollTop(chatHistory[0].scrollHeight);
+
+            App.ajax({
+                url: '/api/ai/chat',
+                method: 'POST',
+                contentType: 'application/json',
+                data: JSON.stringify({
+                    message: val,
+                    history: []
+                }),
+                success: function(response) {
+                    if (response.success && response.data) {
+                        chatHistory.append(`<div class="text-left text-xs bg-surface-container-high text-on-surface p-xs rounded-lg max-w-[90%] mb-xs whitespace-pre-wrap">${App.escapeHtml(response.data)}</div>`);
+                        chatHistory.scrollTop(chatHistory[0].scrollHeight);
+                    }
+                }
+            });
+        }
+
+        $(document).ready(function() {
+            // Populate profile
+            // Populate profile
+            const currentUser = App.getCurrentUser();
+            if (currentUser) {
+                const displayName = currentUser.firstName && currentUser.lastName 
+                    ? `${currentUser.firstName} ${currentUser.lastName}`
+                    : (currentUser.username || currentUser.email || 'User');
+                const email = currentUser.email || '';
+                const initial = (currentUser.firstName ? currentUser.firstName[0] : (currentUser.username ? currentUser.username[0] : 'U')).toUpperCase();
+
+                $('#user-display-name').text(displayName);
+                $('#user-display-email').text(email);
+                $('#user-avatar-initial').text(initial);
+                $('#welcome-title').text(`Welcome back, ${displayName}`);
+
+                // Show Admin Portal link if role is Admin
+                if (currentUser.role === 'Admin') {
+                    $('#admin-nav-container').html(`
+                        <a class="flex items-center gap-base text-on-surface-variant hover:bg-surface-container-highest rounded-lg p-base mx-sm active:scale-95 transition-all duration-200" href="/Pages/admin.html">
+                            <span class="material-symbols-outlined" data-icon="admin_panel_settings">admin_panel_settings</span>
+                            <span class="font-label-md">Admin Portal</span>
+                        </a>
+                    `);
+                }
+            }
+
+            // Attach AI Buddy event handlers
+            $('#ai-buddy-send-btn').on('click', sendAiMessage);
+            $('#ai-buddy-input').on('keypress', function(e) {
+                if (e.which === 13) {
+                    sendAiMessage();
+                }
+            });
+
+            loadMyBlogs();
+        });
+    </script>
+</body>
+</html>
